@@ -32,9 +32,9 @@ export default function Page() {
           <Link href="#booking" className="btn border-shine-gold bg-transparent text-shine-gold hover:bg-shine-gold hover:text-shine-dark">
             Book Now
           </Link>
-        </header>
+      </header>
 
-        <main>
+      <main>
           {/* Hero Section */}
           <section className="relative py-28">
             <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent z-10"></div>
@@ -503,7 +503,7 @@ export default function Page() {
                     </svg>
                   </div>
                   <h3 className="text-xl font-bold mb-4 text-white">3. Enjoy Your Shining Car</h3>
-                  <p className="text-white/80">Relax while we transform your vehicle. When we're done, you'll have a brilliantly clean car without leaving home.</p>
+                  <p className="text-white/80">Relax while we transform your vehicle. When we&apos;re done, you&apos;ll have a brilliantly clean car without leaving home.</p>
                 </div>
               </div>
             </div>
@@ -523,7 +523,7 @@ export default function Page() {
               </p>
               <Link href="#" className="btn btn-lg bg-shine-gold border-shine-gold text-shine-dark hover:bg-transparent hover:text-shine-gold">
                 Book Your Appointment Now
-              </Link>
+          </Link>
             </div>
           </section>
 
@@ -534,7 +534,7 @@ export default function Page() {
                 <h3 className="text-shine-gold font-semibold mb-4">CONTACT US</h3>
                 <h2 className="text-3xl font-bold mb-6 text-white">Get In Touch</h2>
                 <p className="text-lg mb-8 text-white/80">
-                  Have questions about our services or want to schedule an appointment? Contact us and we'll get back to you as soon as possible.
+                  Have questions about our services or want to schedule an appointment? Contact us and we&apos;ll get back to you as soon as possible.
                 </p>
 
                 <div className="space-y-6">
@@ -608,8 +608,8 @@ export default function Page() {
                 </form>
               </div>
             </div>
-          </section>
-        </main>
+        </section>
+      </main>
 
         <footer className="bg-black text-white py-12 border-t border-shine-gold/20">
           <div className="max-w-7xl mx-auto px-8">
