@@ -76,7 +76,7 @@ export default function Page() {
             <div className="max-w-7xl mx-auto px-8 text-center">
               <h3 className="text-shine-gold font-semibold mb-4">OUR COMMITMENT</h3>
               <p className="text-3xl md:text-5xl font-bold max-w-4xl mx-auto text-white">
-                "We're all about making your life easier while delivering <span className="text-shine-gold">unmatched care</span> that leaves your car <span className="text-shine-gold">shining like never before.</span>"
+                &quot;We&apos;re all about making your life easier while delivering <span className="text-shine-gold">unmatched care</span> that leaves your car <span className="text-shine-gold">shining like never before.</span>&quot;
               </p>
 
               {/* Trust Badges Section */}
@@ -91,7 +91,7 @@ export default function Page() {
                 <h3 className="text-shine-gold font-semibold mb-4">ABOUT</h3>
                 <h2 className="text-3xl font-bold mb-6 text-white">Who We Are</h2>
                 <p className="text-lg mb-6 text-white/80">
-                  At Shine Mobile Detailing, we're passionate about making car care stress-free and convenient for customers across the area. Our mission is simple: to help you keep your car clean, protected, and looking its best without the hassle of driving to a shop or coordinating drop-offs and pick-ups.
+                  At Shine Mobile Detailing, we&apos;re passionate about making car care stress-free and convenient for customers across the area. Our mission is simple: to help you keep your car clean, protected, and looking its best without the hassle of driving to a shop or coordinating drop-offs and pick-ups.
                 </p>
                 <p className="text-lg mb-8 text-white/80">
                   Our team of expert detailers brings years of experience and a dedication to perfection with every service. We use only premium products and techniques to ensure your vehicle receives the care it deserves.
@@ -135,7 +135,7 @@ export default function Page() {
                   <div className={`absolute inset-0 bg-black/50 z-10 flex items-center justify-center transition-opacity duration-500 ${showAfter ? 'opacity-0' : 'opacity-100'} md:group-hover:opacity-0`}>
                     <div className="text-center px-6">
                       <h3 className="text-2xl font-bold text-white mb-2">Interior Detailing</h3>
-                      <p className="text-white/80 mb-4">We restore your vehicle's interior to showroom condition</p>
+                      <p className="text-white/80 mb-4">We restore your vehicle&apos;s interior to showroom condition</p>
                       <span className="inline-block text-shine-gold border-2 border-shine-gold px-6 py-3 rounded-full text-base font-bold shadow-lg bg-black/70 hover:bg-shine-gold hover:text-black transition-colors">
                         {showAfter ? 'Show Before' : 'Show After'}
                       </span>
@@ -183,7 +183,7 @@ export default function Page() {
                       </div>
                       <div>
                         <h4 className="text-lg font-semibold text-white">Meticulous Attention to Detail</h4>
-                        <p className="text-white/80">We clean every crevice and surface, restoring your car's interior to like-new condition.</p>
+                        <p className="text-white/80">We clean every crevice and surface, restoring your car&apos;s interior to like-new condition.</p>
                       </div>
                     </li>
                     <li className="flex items-start gap-3">
@@ -228,7 +228,7 @@ export default function Page() {
                 <div className="flex flex-col justify-center p-8 bg-shine-dark/50 rounded-xl border border-shine-gold/30 order-2 md:order-1">
                   <h3 className="text-2xl font-bold text-white mb-6">Exterior Detailing Excellence</h3>
                   <p className="text-white/80 mb-6">
-                    Our exterior detailing removes built-up dirt, road grime, and contaminants that regular washing can't eliminate. We restore your vehicle's showroom shine and protect its surfaces.
+                    Our exterior detailing removes built-up dirt, road grime, and contaminants that regular washing can&apos;t eliminate. We restore your vehicle&apos;s showroom shine and protect its surfaces.
                   </p>
                   <ul className="space-y-4">
                     <li className="flex items-start gap-3">
@@ -264,7 +264,7 @@ export default function Page() {
                   <div className={`absolute inset-0 bg-black/50 z-10 flex items-center justify-center transition-opacity duration-500 ${showAfter2 ? 'opacity-0' : 'opacity-100'} md:group-hover:opacity-0`}>
                     <div className="text-center px-6">
                       <h3 className="text-2xl font-bold text-white mb-2">Exterior Detailing</h3>
-                      <p className="text-white/80 mb-4">We restore your vehicle's exterior to a brilliant shine</p>
+                      <p className="text-white/80 mb-4">We restore your vehicle&apos;s exterior to a brilliant shine</p>
                       <span className="inline-block text-shine-gold border-2 border-shine-gold px-6 py-3 rounded-full text-base font-bold shadow-lg bg-black/70 hover:bg-shine-gold hover:text-black transition-colors">
                         {showAfter2 ? 'Show Before' : 'Show After'}
                       </span>
@@ -317,19 +317,19 @@ export default function Page() {
                     name: "Dimma Issam",
                     date: "a month ago",
                     img: "/351161829_1633315233844973_4495546105464823509_n.jpg",
-                    text: "Just had the interior and exterior of my car cleaned. The guys are hardworking and their work is meticulous. They did an impeccable job! They go to you, so you don't have to worry about dropping off the car and waiting. The car feels like it's brand new! It's super clean and smells so fresh. The detailing is incredible! I'm so grateful and will definitely reach out again🥰"
+                    text: "Just had the interior and exterior of my car cleaned. The guys are hardworking and their work is meticulous. They did an impeccable job! They go to you, so you don&apos;t have to worry about dropping off the car and waiting. The car feels like it&apos;s brand new! It&apos;s super clean and smells so fresh. The detailing is incredible! I&apos;m so grateful and will definitely reach out again🥰"
                   },
                   {
                     name: "Katie Ryan",
                     date: "10 months ago",
                     img: "/487489073_10165302462182178_1450958078886028743_n.jpg",
-                    text: "Wow! Thank you for making our truck look brand new and incredible! What a great service and highly recommend these guys! These men spent over 3 hours cleaning the inside of our truck and it's never looked better. And the best part is they came to us to detail our truck and they booked us in very quickly! A big thank you 😃"
+                    text: "Wow! Thank you for making our truck look brand new and incredible! What a great service and highly recommend these guys! These men spent over 3 hours cleaning the inside of our truck and it&apos;s never looked better. And the best part is they came to us to detail our truck and they booked us in very quickly! A big thank you 😃"
                   },
                   {
                     name: "Tabitha Knowles",
                     date: "2 months ago",
                     img: "/465988361_10101481937558265_7673078266829928699_n.jpg",
-                    text: "Wow! I am beyond impressed! I didn't think my vehicle was THAT dirty but I was speechless when I saw it after it was detailed! The guys did an outstanding job, I am so impressed and would recommend them to everyone! They were very professional and great to work with - I will definitely have them clean my Rav again, very reasonably priced for such an amazing job!"
+                    text: "Wow! I am beyond impressed! I didn&apos;t think my vehicle was THAT dirty but I was speechless when I saw it after it was detailed! The guys did an outstanding job, I am so impressed and would recommend them to everyone! They were very professional and great to work with - I will definitely have them clean my Rav again, very reasonably priced for such an amazing job!"
                   },
                 ].map((review, i) => (
                   <div key={i} className="bg-black p-6 rounded-xl shadow-lg border border-shine-gold/20">
@@ -338,7 +338,7 @@ export default function Page() {
                         {review.img ? (
                           <Image 
                             src={review.img} 
-                            alt={`${review.name}'s profile`} 
+                            alt={`${review.name}&apos;s profile`} 
                             fill
                             className="object-cover"
                           />
