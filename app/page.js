@@ -499,7 +499,7 @@ export default function Page() {
                 <div className="text-center bg-shine-dark/30 p-8 rounded-xl border border-shine-gold/20 hover:border-shine-gold/50 transition-all">
                   <div className="bg-shine-gold/10 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 border border-shine-gold/40">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-shine-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905 0 .905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
                     </svg>
                   </div>
                   <h3 className="text-xl font-bold mb-4 text-white">3. Enjoy Your Shining Car</h3>
@@ -561,6 +561,19 @@ export default function Page() {
                       <p className="text-white/80">shinemobiledetailings@gmail.com</p>
                     </div>
                   </div>
+
+                  <div className="flex items-center gap-4">
+                    <div className="bg-shine-gold/10 p-3 rounded-full border border-shine-gold/30">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-shine-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-white">Hours</h4>
+                      <p className="text-white/80">Monday-Saturday: 8am-6pm</p>
+                      <p className="text-white/80">Sunday: 9am-4pm</p>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -603,9 +616,7 @@ export default function Page() {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div className="md:col-span-2">
                 <div className="flex items-center gap-2 mb-4">
-                 
-                    <Image src="/icon.png" width={50} height={50} />
-                  
+                  <Image src="/icon.png" width={50} height={50} alt="Shine Mobile Detailing Logo" />
                   <span className="font-bold text-xl text-white">Shine Mobile Detailing</span>
                 </div>
                 <p className="mb-6 text-white/70 max-w-md">
