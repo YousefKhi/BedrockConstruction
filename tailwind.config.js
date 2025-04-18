@@ -1,4 +1,5 @@
-module.exports = {
+/** @type {import('tailwindcss').Config} */
+const config = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -55,14 +56,58 @@ module.exports = {
           "100%": { backgroundPosition: "0% 50%" },
         },
       },
+      colors: {
+        // Custom colors for Shine Mobile Detailing
+        'shine-blue': '#0066cc',
+        'shine-dark': '#121212',
+        'shine-silver': '#f5f5f5',
+        'shine-gold': '#D4AF37',
+      },
     },
   },
   plugins: [require("daisyui")],
   daisyui: {
-    // Light & dark themes are added by default (it switches automatically based on OS settings)
-    // You can add another theme among the list of 30+
-    // Add "data-theme='theme_name" to any HTML tag to enable the 'theme_name' theme.
-    // https://daisyui.com/
-    themes: ["light", "dark"],
+    themes: [
+      {
+        light: {
+          "primary": "#121212",
+          "primary-content": "#D4AF37",
+          "secondary": "#D4AF37",
+          "secondary-content": "#121212", 
+          "accent": "#D4AF37",
+          "accent-content": "#121212",
+          "neutral": "#121212",
+          "neutral-content": "#ffffff",
+          "base-100": "#ffffff",
+          "base-200": "#f5f5f5",
+          "base-300": "#e5e5e5",
+          "base-content": "#121212",
+          "info": "#3abff8",
+          "success": "#36d399",
+          "warning": "#fbbd23",
+          "error": "#f87272"
+        },
+        dark: {
+          "primary": "#121212",
+          "primary-content": "#D4AF37",
+          "secondary": "#D4AF37",
+          "secondary-content": "#121212",
+          "accent": "#D4AF37",
+          "accent-content": "#121212",
+          "neutral": "#0a0a0a",
+          "neutral-content": "#ffffff",
+          "base-100": "#121212",
+          "base-200": "#0f0f0f",
+          "base-300": "#080808",
+          "base-content": "#D4AF37",
+          "info": "#3abff8",
+          "success": "#36d399",
+          "warning": "#fbbd23",
+          "error": "#f87272"
+        },
+      },
+    ],
   },
 };
+
+module.exports = config;
