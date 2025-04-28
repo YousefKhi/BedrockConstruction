@@ -11,6 +11,132 @@ import { useState } from "react";
 export default function Page() {
   const [showAfter, setShowAfter] = useState(false);
   const [showAfter2, setShowAfter2] = useState(false);
+  const [vehicleType, setVehicleType] = useState("sedan");
+
+  // Pricing data based on vehicle type
+  const pricingData = {
+    sedan: {
+      interior: { 
+        price: 140, 
+        name: "Interior Only", 
+        description: "Complete interior detailing for sedans",
+        features: [
+          { name: "Full Interior Vacuum" },
+          { name: "Dashboard & Console Detailing" },
+          { name: "Door Panels & Trim Cleaning" },
+          { name: "Carpet & Upholstery Shampooing" },
+          { name: "Window Cleaning (Interior)" }
+        ]
+      },
+      exterior: { 
+        price: 55, 
+        name: "Exterior Only", 
+        description: "Complete exterior detailing for sedans",
+        features: [
+          { name: "Hand Wash & Dry" },
+          { name: "Tire & Wheel Cleaning" },
+          { name: "Window Cleaning (Exterior)" },
+          { name: "Paint Decontamination" },
+          { name: "Wax Protection" }
+        ]
+      },
+      both: { 
+        price: 185, 
+        name: "Interior + Exterior", 
+        description: "Complete interior and exterior detailing for sedans", 
+        isFeatured: true,
+        features: [
+          { name: "Everything in Interior Package" },
+          { name: "Everything in Exterior Package" },
+          { name: "Trunk Cleaning" },
+          { name: "Complementary Touch-up Kit" }
+        ]
+      }
+    },
+    suv: {
+      interior: { 
+        price: 170, 
+        name: "Interior Only", 
+        description: "Complete interior detailing for SUVs",
+        features: [
+          { name: "Full Interior Vacuum" },
+          { name: "Dashboard & Console Detailing" },
+          { name: "Door Panels & Trim Cleaning" },
+          { name: "Carpet & Upholstery Shampooing" },
+          { name: "Window Cleaning (Interior)" }
+        ]
+      },
+      exterior: { 
+        price: 55, 
+        name: "Exterior Only", 
+        description: "Complete exterior detailing for SUVs",
+        features: [
+          { name: "Hand Wash & Dry" },
+          { name: "Tire & Wheel Cleaning" },
+          { name: "Window Cleaning (Exterior)" },
+          { name: "Paint Decontamination" },
+          { name: "Wax Protection" }
+        ]
+      },
+      both: { 
+        price: 215, 
+        name: "Interior + Exterior", 
+        description: "Complete interior and exterior detailing for SUVs", 
+        isFeatured: true,
+        features: [
+          { name: "Everything in Interior Package" },
+          { name: "Everything in Exterior Package" },
+          { name: "Cargo Area Cleaning" },
+          { name: "Complementary Touch-up Kit" }
+        ]
+      }
+    },
+    truck: {
+      interior: { 
+        price: 190, 
+        name: "Interior Only", 
+        description: "Complete interior detailing for trucks and vans",
+        features: [
+          { name: "Full Interior Vacuum" },
+          { name: "Dashboard & Console Detailing" },
+          { name: "Door Panels & Trim Cleaning" },
+          { name: "Carpet & Upholstery Shampooing" },
+          { name: "Window Cleaning (Interior)" }
+        ]
+      },
+      exterior: { 
+        price: 70, 
+        name: "Exterior Only", 
+        description: "Complete exterior detailing for trucks and vans",
+        features: [
+          { name: "Hand Wash & Dry" },
+          { name: "Tire & Wheel Cleaning" },
+          { name: "Window Cleaning (Exterior)" },
+          { name: "Paint Decontamination" },
+          { name: "Wax Protection" }
+        ]
+      },
+      both: { 
+        price: 250, 
+        name: "Interior + Exterior", 
+        description: "Complete interior and exterior detailing for trucks and vans", 
+        isFeatured: true,
+        features: [
+          { name: "Everything in Interior Package" },
+          { name: "Everything in Exterior Package" },
+          { name: "Bed/Cargo Area Cleaning" },
+          { name: "Complementary Touch-up Kit" }
+        ]
+      }
+    }
+  };
+
+  // Current pricing based on selected vehicle type
+  const currentPricing = [
+    pricingData[vehicleType].exterior,
+    pricingData[vehicleType].both,
+    pricingData[vehicleType].interior
+  ];
 
   return (
     <>
@@ -420,10 +546,47 @@ export default function Page() {
               <div className="text-center mb-16">
                 <h3 className="text-shine-gold font-semibold mb-4">SERVICES</h3>
                 <h2 className="text-3xl font-bold text-white">Premium Detailing Packages</h2>
+                
+                {/* Vehicle Type Selector */}
+                <div className="mt-8 max-w-xl mx-auto">
+                  <p className="text-white mb-4">Select your vehicle type:</p>
+                  <div className="flex justify-center gap-4 flex-wrap">
+                    <button 
+                      onClick={() => setVehicleType("sedan")} 
+                      className={`px-6 py-3 rounded-full text-sm font-bold transition-all ${
+                        vehicleType === "sedan" 
+                          ? "bg-shine-gold text-shine-dark" 
+                          : "bg-transparent border border-shine-gold/70 text-shine-gold hover:border-shine-gold"
+                      }`}
+                    >
+                      Sedan
+                    </button>
+                    <button 
+                      onClick={() => setVehicleType("suv")} 
+                      className={`px-6 py-3 rounded-full text-sm font-bold transition-all ${
+                        vehicleType === "suv" 
+                          ? "bg-shine-gold text-shine-dark" 
+                          : "bg-transparent border border-shine-gold/70 text-shine-gold hover:border-shine-gold"
+                      }`}
+                    >
+                      SUV
+                    </button>
+                    <button 
+                      onClick={() => setVehicleType("truck")} 
+                      className={`px-6 py-3 rounded-full text-sm font-bold transition-all ${
+                        vehicleType === "truck" 
+                          ? "bg-shine-gold text-shine-dark" 
+                          : "bg-transparent border border-shine-gold/70 text-shine-gold hover:border-shine-gold"
+                      }`}
+                    >
+                      Truck/Van
+                    </button>
+                  </div>
+                </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {config.stripe.plans.map((plan, i) => {
+                {currentPricing.map((plan, i) => {
                   // Dynamic styling for each card
                   const isHighlight = plan.isFeatured;
                   const cardStyle = isHighlight 
@@ -450,14 +613,16 @@ export default function Page() {
                       </div>
                       <div className="p-6 border-t border-shine-gold/20">
                         <ul className="space-y-3">
-                          {plan.features.map((feature, j) => (
+                          {plan.features ? plan.features.map((feature, j) => (
                             <li key={j} className="flex items-center gap-2 text-white/90">
                               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-shine-gold" viewBox="0 0 20 20" fill="currentColor">
                                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                               </svg>
                               <span>{feature.name}</span>
                             </li>
-                          ))}
+                          )) : (
+                            <li className="text-white/90">Contact for details</li>
+                          )}
                         </ul>
                       </div>
                     </div>
@@ -509,21 +674,115 @@ export default function Page() {
             </div>
           </section>
 
-          {/* Booking CTA */}
-          <section id="booking" className="py-24 bg-gradient-to-r from-black to-shine-dark/90 relative overflow-hidden">
-            <div className="absolute inset-0 opacity-30">
-              <div className="w-full h-full bg-shine-dark flex items-center justify-center">
-                <span className="text-shine-gold/0">CTA Background Image</span>
+          {/* Portfolio Showcase Section - replacing the removed Booking CTA */}
+          <section id="portfolio" className="py-24 bg-gradient-to-r from-black to-shine-dark/90 relative overflow-hidden">
+            <div className="max-w-7xl mx-auto px-8">
+              <div className="text-center mb-16">
+                <h3 className="text-shine-gold font-semibold mb-4">OUR PORTFOLIO</h3>
+                <h2 className="text-3xl font-bold text-white mb-4">Luxury Vehicles We've Detailed</h2>
+                <p className="text-lg text-white/80 max-w-3xl mx-auto">
+                  We take pride in treating every vehicle with the same level of care and attention to detail, from everyday cars to exotic supercars.
+                </p>
               </div>
-            </div>
-            <div className="max-w-7xl mx-auto px-8 text-center relative z-10">
-              <h2 className="text-4xl font-bold mb-6 text-white">Ready to Transform Your Vehicle?</h2>
-              <p className="text-xl mb-8 max-w-2xl mx-auto text-white/80">
-                Book your mobile detailing appointment today and experience the convenience of professional car care at your doorstep.
-              </p>
-              <Link href="#" className="btn btn-lg bg-shine-gold border-shine-gold text-shine-dark hover:bg-transparent hover:text-shine-gold">
-                Book Your Appointment Now
-          </Link>
+
+              {/* Featured Vehicle Spotlight */}
+              <div className="mb-16 overflow-hidden rounded-xl border-2 border-shine-gold shadow-2xl">
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10"></div>
+                  <div className="relative h-[60vh] w-full">
+                    <Image
+                      src="/IMG_1287.jpg"
+                      alt="Lamborghini Urus detailed by Shine Mobile Detailing"
+                      fill
+                      className="object-cover"
+                      priority
+                    />
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-8 z-20">
+                    <div className="inline-block bg-shine-gold/90 px-4 py-2 rounded-lg text-shine-dark font-bold mb-4">
+                      Featured Detail
+                    </div>
+                    <h3 className="text-3xl font-bold text-white mb-2">Lamborghini Urus</h3>
+                    <p className="text-white/90 max-w-2xl">
+                      Our premium interior and exterior detailing package brings out the best in this stunning performance SUV, 
+                      enhancing its vibrant orange finish and pristine interior.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Gallery Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="rounded-xl overflow-hidden border border-shine-gold/30 shadow-lg group relative">
+                  <div className="relative h-[300px]">
+                    <Image
+                      src="/IMG_1291.jpg"
+                      alt="Lamborghini Urus interior detailing"
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                      <h4 className="text-white font-bold">Urus Interior</h4>
+                      <p className="text-white/80 text-sm">Premium leather restoration</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="rounded-xl overflow-hidden border border-shine-gold/30 shadow-lg group relative">
+                  <div className="relative h-[300px]">
+                    <Image
+                      src="/IMG_4206.JPEG"
+                      alt="Fiat 124 Spider detailed by Shine Mobile Detailing"
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                      <h4 className="text-white font-bold">Fiat 124 Spider</h4>
+                      <p className="text-white/80 text-sm">Convertible paint restoration</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="rounded-xl overflow-hidden border border-shine-gold/30 shadow-lg group relative">
+                  <div className="relative h-[300px]">
+                    <Image
+                      src="/IMG_4781.jpg"
+                      alt="Hyundai Elantra detailed by Shine Mobile Detailing"
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                      <h4 className="text-white font-bold">Hyundai Elantra</h4>
+                      <p className="text-white/80 text-sm">Showroom finish detailing</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="rounded-xl overflow-hidden border border-shine-gold/30 shadow-lg group relative">
+                  <div className="relative h-[300px]">
+                    <Image
+                      src="/IMG_6807.JPG"
+                      alt="Ford F-150 Raptor detailed by Shine Mobile Detailing"
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                      <h4 className="text-white font-bold">Ford F-150 Raptor</h4>
+                      <p className="text-white/80 text-sm">Truck detail package</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-12 text-center">
+                <Link href="/#contact" className="btn bg-shine-gold border-shine-gold text-shine-dark hover:bg-transparent hover:text-shine-gold btn-lg">
+                  Book Your Detail Today
+                </Link>
+              </div>
             </div>
           </section>
 
@@ -579,28 +838,29 @@ export default function Page() {
 
               <div className="bg-shine-dark p-8 rounded-xl border border-shine-gold/20">
                 <h3 className="text-xl font-bold mb-6 text-white">Send Us a Message</h3>
-                <form className="space-y-4">
+                <form action="https://formspree.io/f/manonznr" method="POST" className="space-y-4">
+                  <input type="hidden" name="_next" value="https://shinemobiledetailings.ca/thank-you" />
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium mb-1 text-white/80">First Name</label>
-                      <input type="text" className="input bg-black border-shine-gold/30 text-white w-full focus:border-shine-gold" />
+                      <input type="text" name="firstName" className="input bg-black border-shine-gold/30 text-white w-full focus:border-shine-gold" required />
                     </div>
                     <div>
                       <label className="block text-sm font-medium mb-1 text-white/80">Last Name</label>
-                      <input type="text" className="input bg-black border-shine-gold/30 text-white w-full focus:border-shine-gold" />
+                      <input type="text" name="lastName" className="input bg-black border-shine-gold/30 text-white w-full focus:border-shine-gold" required />
                     </div>
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-1 text-white/80">Email</label>
-                    <input type="email" className="input bg-black border-shine-gold/30 text-white w-full focus:border-shine-gold" />
+                    <input type="email" name="email" className="input bg-black border-shine-gold/30 text-white w-full focus:border-shine-gold" required />
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-1 text-white/80">Phone</label>
-                    <input type="tel" className="input bg-black border-shine-gold/30 text-white w-full focus:border-shine-gold" />
+                    <input type="tel" name="phone" className="input bg-black border-shine-gold/30 text-white w-full focus:border-shine-gold" required />
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-1 text-white/80">Message</label>
-                    <textarea rows="4" className="textarea bg-black border-shine-gold/30 text-white w-full focus:border-shine-gold"></textarea>
+                    <textarea name="message" rows="4" className="textarea bg-black border-shine-gold/30 text-white w-full focus:border-shine-gold" required></textarea>
                   </div>
                   <button type="submit" className="btn bg-shine-gold border-shine-gold text-shine-dark hover:bg-transparent hover:text-shine-gold w-full">
                     Send Message
@@ -608,8 +868,8 @@ export default function Page() {
                 </form>
               </div>
             </div>
-        </section>
-      </main>
+          </section>
+        </main>
 
         <footer className="bg-black text-white py-12 border-t border-shine-gold/20">
           <div className="max-w-7xl mx-auto px-8">
@@ -647,14 +907,7 @@ export default function Page() {
                 </ul>
               </div>
 
-              <div>
-                <h4 className="font-bold text-lg mb-4 text-white">Stay Up to Date</h4>
-                <p className="mb-4 text-white/70">Subscribe to our newsletter for the latest updates and promotions.</p>
-                <div className="flex">
-                  <input type="email" placeholder="Your email" className="input bg-shine-dark border-shine-gold/30 rounded-r-none text-white" />
-                  <button className="btn bg-shine-gold text-shine-dark border-shine-gold rounded-l-none hover:bg-transparent hover:text-shine-gold">Subscribe</button>
-                </div>
-              </div>
+              
             </div>
 
             <div className="mt-12 pt-8 border-t border-shine-gold/10 flex flex-col md:flex-row justify-between items-center">
