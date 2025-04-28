@@ -5,6 +5,29 @@
 html,
 body {
   scroll-behavior: smooth !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Optimize image rendering */
+img {
+  image-rendering: auto;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Enable hardware acceleration for transforms and animations */
+.animate-hardware {
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Reduce layout shifts by setting content-visibility */
+.content-optimize {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
 }
 
 /* It makes the HTML progress bar filling smooth when value change. */

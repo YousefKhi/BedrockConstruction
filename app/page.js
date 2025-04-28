@@ -151,7 +151,7 @@ export default function Page() {
             <Link href="#contact" className="text-white hover:text-shine-gold transition-colors">Contact</Link>
             <Link href="#reviews" className="text-white hover:text-shine-gold transition-colors">Reviews</Link>
           </nav>
-          <Link href="#booking" className="btn border-shine-gold bg-transparent text-shine-gold hover:bg-shine-gold hover:text-shine-dark">
+          <Link href="#contact" className="btn border-shine-gold bg-transparent text-shine-gold hover:bg-shine-gold hover:text-shine-dark">
             Book Now
           </Link>
       </header>
@@ -168,6 +168,8 @@ export default function Page() {
                 className="object-cover object-center scale-x-[-1]"
                 priority
                 style={{ opacity: 0.5 }}
+                sizes="100vw"
+                quality={80}
               />
             </div>
 
@@ -180,7 +182,7 @@ export default function Page() {
                   Experience premium mobile detailing that comes to you. We transform your vehicle with meticulous care and professional service, all without you having to leave your home.
                 </p>
                 <div className="flex gap-4">
-                  <Link href="#booking" className="btn bg-shine-gold border-shine-gold text-shine-dark hover:bg-transparent hover:text-shine-gold btn-lg">
+                  <Link href="#contact" className="btn bg-shine-gold border-shine-gold text-shine-dark hover:bg-transparent hover:text-shine-gold btn-lg">
                     Schedule Now
                   </Link>
                   <Link href="#contact" className="btn btn-outline border-white text-white hover:border-shine-gold hover:text-shine-gold btn-lg">
@@ -228,8 +230,11 @@ export default function Page() {
                     src="/IMG_6813.JPG" 
                     alt="Shine Mobile Detailing team member" 
                     fill
-                    className="object-cover object-center scale-[0.8]"
+                    className="object-cover object-center scale-[0.8] animate-hardware"
                     style={{ objectPosition: "50% 40%" }}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    quality={75}
+                    loading="eager"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-60"></div>
                 </div>
@@ -242,7 +247,7 @@ export default function Page() {
             <div className="max-w-7xl mx-auto px-8">
               <div className="text-center mb-16">
                 <h3 className="text-shine-gold font-semibold mb-4">OUR PORTFOLIO</h3>
-                <h2 className="text-3xl font-bold text-white mb-4">Luxury Vehicles We&apos;ve Detailed</h2>
+                <h2 className="text-3xl font-bold text-white mb-4">Vehicles We&apos;ve Detailed</h2>
                 <p className="text-lg text-white/80 max-w-3xl mx-auto">
                   We take pride in treating every vehicle with the same level of care and attention to detail, from everyday cars to exotic supercars.
                 </p>
@@ -257,8 +262,10 @@ export default function Page() {
                       src="/IMG_1287.jpg"
                       alt="Lamborghini Urus detailed by Shine Mobile Detailing"
                       fill
-                      className="object-cover"
+                      className="object-cover object-center animate-hardware"
                       priority
+                      sizes="100vw"
+                      quality={80}
                     />
                   </div>
                   <div className="absolute bottom-0 left-0 right-0 p-8 z-20">
@@ -282,12 +289,14 @@ export default function Page() {
                       src="/IMG_1291.jpg"
                       alt="Lamborghini Urus interior detailing"
                       fill
-                      className="object-cover"
+                      className="object-cover animate-hardware"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                      quality={75}
+                      loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
                     <div className="absolute bottom-0 left-0 right-0 p-4">
                       <h4 className="text-white font-bold">Urus Interior</h4>
-                      <p className="text-white/80 text-sm">Premium leather restoration</p>
                     </div>
                   </div>
                 </div>
@@ -303,7 +312,7 @@ export default function Page() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
                     <div className="absolute bottom-0 left-0 right-0 p-4">
                       <h4 className="text-white font-bold">Fiat 124 Spider</h4>
-                      <p className="text-white/80 text-sm">Convertible paint restoration</p>
+                      
                     </div>
                   </div>
                 </div>
@@ -377,17 +386,19 @@ export default function Page() {
                   </div>
                   
                   {/* Before Image */}
-                  <div className={`absolute inset-0 z-0 transition-opacity duration-500 ${showAfter ? 'opacity-0' : 'opacity-100'} md:group-hover:opacity-0`}>
+                  <div className={`absolute inset-0 z-0 transition-opacity duration-500 ${showAfter ? 'opacity-0' : 'opacity-100'} md:group-hover:opacity-0 animate-hardware`}>
                     <Image 
                       src="/IMG_6822.JPG" 
                       alt="Before interior detailing" 
                       fill
                       className="object-cover object-center"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      quality={75}
                     />
                   </div>
                   
                   {/* After Image - Initially hidden, shown on hover */}
-                  <div className={`absolute inset-0 z-0 transition-opacity duration-500 ${showAfter ? 'opacity-100' : 'opacity-0'} md:group-hover:opacity-100`}>
+                  <div className={`absolute inset-0 z-0 transition-opacity duration-500 ${showAfter ? 'opacity-100' : 'opacity-0'} md:group-hover:opacity-100 animate-hardware`}>
                     <Image 
                       src="/IMG_6823.JPG" 
                       alt="After interior detailing" 
@@ -506,7 +517,7 @@ export default function Page() {
                   </div>
                   
                   {/* Before Image */}
-                  <div className={`absolute inset-0 z-0 transition-opacity duration-500 ${showAfter2 ? 'opacity-0' : 'opacity-100'} md:group-hover:opacity-0`}>
+                  <div className={`absolute inset-0 z-0 transition-opacity duration-500 ${showAfter2 ? 'opacity-0' : 'opacity-100'} md:group-hover:opacity-0 animate-hardware`}>
                     <Image 
                       src="/IMG_1211.JPG" 
                       alt="Before exterior detailing" 
@@ -516,7 +527,7 @@ export default function Page() {
                   </div>
                   
                   {/* After Image */}
-                  <div className={`absolute inset-0 z-0 transition-opacity duration-500 ${showAfter2 ? 'opacity-100' : 'opacity-0'} md:group-hover:opacity-100`}>
+                  <div className={`absolute inset-0 z-0 transition-opacity duration-500 ${showAfter2 ? 'opacity-100' : 'opacity-0'} md:group-hover:opacity-100 animate-hardware`}>
                     <Image 
                       src="/IMG_1212.JPG" 
                       alt="After exterior detailing" 
@@ -538,7 +549,7 @@ export default function Page() {
           </section>
 
           {/* Reviews Section - Moved up in the page */}
-          <section id="reviews" className="py-24 bg-shine-dark">
+          <section id="reviews" className="py-24 bg-shine-dark content-optimize">
             <div className="max-w-7xl mx-auto px-8">
               <div className="text-center mb-16">
                 <h3 className="text-shine-gold font-semibold mb-4">TESTIMONIALS</h3>
@@ -551,19 +562,19 @@ export default function Page() {
                     name: "Dimma Issam",
                     date: "a month ago",
                     img: "/351161829_1633315233844973_4495546105464823509_n.jpg",
-                    text: "Just had the interior and exterior of my car cleaned. The guys are hardworking and their work is meticulous. They did an impeccable job! They go to you, so you don&apos;t have to worry about dropping off the car and waiting. The car feels like it&apos;s brand new! It&apos;s super clean and smells so fresh. The detailing is incredible! I&apos;m so grateful and will definitely reach out again🥰"
+                    text: "Just had the interior and exterior of my car cleaned. The guys are hardworking and their work is meticulous. They did an impeccable job! They go to you, so you dont have to worry about dropping off the car and waiting. The car feels like its brand new! Its super clean and smells so fresh. The detailing is incredible! Im so grateful and will definitely reach out again🥰"
                   },
                   {
                     name: "Katie Ryan",
                     date: "10 months ago",
                     img: "/487489073_10165302462182178_1450958078886028743_n.jpg",
-                    text: "Wow! Thank you for making our truck look brand new and incredible! What a great service and highly recommend these guys! These men spent over 3 hours cleaning the inside of our truck and it&apos;s never looked better. And the best part is they came to us to detail our truck and they booked us in very quickly! A big thank you 😃"
+                    text: "Wow! Thank you for making our truck look brand new and incredible! What a great service and highly recommend these guys! These men spent over 3 hours cleaning the inside of our truck and its never looked better. And the best part is they came to us to detail our truck and they booked us in very quickly! A big thank you 😃"
                   },
                   {
                     name: "Tabitha Knowles",
                     date: "2 months ago",
                     img: "/465988361_10101481937558265_7673078266829928699_n.jpg",
-                    text: "Wow! I am beyond impressed! I didn&apos;t think my vehicle was THAT dirty but I was speechless when I saw it after it was detailed! The guys did an outstanding job, I am so impressed and would recommend them to everyone! They were very professional and great to work with - I will definitely have them clean my Rav again, very reasonably priced for such an amazing job!"
+                    text: "Wow! I am beyond impressed! I didnt think my vehicle was THAT dirty but I was speechless when I saw it after it was detailed! The guys did an outstanding job, I am so impressed and would recommend them to everyone! They were very professional and great to work with - I will definitely have them clean my Rav again, very reasonably priced for such an amazing job!"
                   },
                 ].map((review, i) => (
                   <div key={i} className="bg-black p-6 rounded-xl shadow-lg border border-shine-gold/20">
@@ -649,7 +660,7 @@ export default function Page() {
           </section>
 
           {/* Services */}
-          <section id="services" className="py-24 bg-gradient-to-b from-black to-shine-dark">
+          <section id="services" className="py-24 bg-gradient-to-b from-black to-shine-dark content-optimize">
             <div className="max-w-7xl mx-auto px-8">
               <div className="text-center mb-16">
                 <h3 className="text-shine-gold font-semibold mb-4">SERVICES</h3>
@@ -713,7 +724,7 @@ export default function Page() {
                           <span className="text-4xl font-bold text-shine-gold">${plan.price}</span>
                           {plan.priceAnchor && <span className="text-lg line-through opacity-50 text-white/60">${plan.priceAnchor}</span>}
                         </div>
-                        <Link href="#booking" className={`btn w-full ${isHighlight 
+                        <Link href="#contact" className={`btn w-full ${isHighlight 
                           ? "bg-shine-gold border-shine-gold text-shine-dark hover:bg-transparent hover:text-shine-gold" 
                           : "bg-transparent border-shine-gold/70 text-shine-gold hover:border-shine-gold hover:bg-shine-gold/10"}`}>
                           Book Now
@@ -741,7 +752,7 @@ export default function Page() {
           </section>
 
           {/* Process Section */}
-          <section className="py-24 bg-black">
+          <section className="py-24 bg-black content-optimize">
             <div className="max-w-7xl mx-auto px-8">
               <div className="text-center mb-16">
                 <h3 className="text-shine-gold font-semibold mb-4">HOW IT WORKS</h3>
@@ -783,7 +794,7 @@ export default function Page() {
           </section>
 
           {/* Contact Section */}
-          <section id="contact" className="py-24 bg-black">
+          <section id="contact" className="py-24 bg-black content-optimize">
             <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-12">
               <div>
                 <h3 className="text-shine-gold font-semibold mb-4">CONTACT US</h3>
