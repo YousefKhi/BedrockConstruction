@@ -1,11 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import ButtonSignin from "@/components/ButtonSignin";
-import TestimonialsAvatars from "@/components/TestimonialsAvatars";
-import config from "@/config";
 import Image from "next/image";
-import logo from "@/app/icon.png";
 import { useState } from "react";
 
 export default function Page() {
@@ -144,7 +140,7 @@ export default function Page() {
         <header className="p-4 flex justify-between items-center max-w-7xl mx-auto">
           <div className="flex items-center gap-2">
             
-              <Image src="/icon.png" width={50} height={50} />
+              <Image src="/icon.png" width={50} height={50} alt="Shine Mobile Detailing Logo" />
             
             <span className="font-bold text-xl text-white">Shine Mobile Detailing</span>
           </div>
@@ -679,7 +675,7 @@ export default function Page() {
             <div className="max-w-7xl mx-auto px-8">
               <div className="text-center mb-16">
                 <h3 className="text-shine-gold font-semibold mb-4">OUR PORTFOLIO</h3>
-                <h2 className="text-3xl font-bold text-white mb-4">Luxury Vehicles We've Detailed</h2>
+                <h2 className="text-3xl font-bold text-white mb-4">Luxury Vehicles We&apos;ve Detailed</h2>
                 <p className="text-lg text-white/80 max-w-3xl mx-auto">
                   We take pride in treating every vehicle with the same level of care and attention to detail, from everyday cars to exotic supercars.
                 </p>

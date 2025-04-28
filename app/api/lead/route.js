@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import connectMongo from "@/libs/mongoose";
-import Lead from "@/models/Lead";
+// Uncomment the Lead import when you need to use it
+// import Lead from "@/models/Lead";
 
 // This route is used to store the leads that are generated from the landing page.
 // The API call is initiated by <ButtonLead /> component

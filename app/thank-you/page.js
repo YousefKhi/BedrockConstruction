@@ -26,7 +26,7 @@ export default function ThankYou() {
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">Thank You!</h1>
             <p className="text-xl text-white/80 mb-8">
-              We've received your message and will be in touch with you shortly. 
+              We&apos;ve received your message and will be in touch with you shortly. 
               We appreciate your interest in our mobile detailing services.
             </p>
             <div className="flex justify-center gap-4 flex-wrap">
