@@ -237,6 +237,118 @@ export default function Page() {
             </div>
           </section>
 
+          {/* Portfolio Showcase Section */}
+          <section id="portfolio" className="py-24 bg-gradient-to-r from-black to-shine-dark/90 relative overflow-hidden">
+            <div className="max-w-7xl mx-auto px-8">
+              <div className="text-center mb-16">
+                <h3 className="text-shine-gold font-semibold mb-4">OUR PORTFOLIO</h3>
+                <h2 className="text-3xl font-bold text-white mb-4">Luxury Vehicles We&apos;ve Detailed</h2>
+                <p className="text-lg text-white/80 max-w-3xl mx-auto">
+                  We take pride in treating every vehicle with the same level of care and attention to detail, from everyday cars to exotic supercars.
+                </p>
+              </div>
+
+              {/* Featured Vehicle Spotlight */}
+              <div className="mb-16 overflow-hidden rounded-xl border-2 border-shine-gold shadow-2xl">
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10"></div>
+                  <div className="relative h-[60vh] w-full">
+                    <Image
+                      src="/IMG_1287.jpg"
+                      alt="Lamborghini Urus detailed by Shine Mobile Detailing"
+                      fill
+                      className="object-cover"
+                      priority
+                    />
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-8 z-20">
+                    <div className="inline-block bg-shine-gold/90 px-4 py-2 rounded-lg text-shine-dark font-bold mb-4 hidden md:inline-block">
+                      Featured Detail
+                    </div>
+                    <h3 className="text-3xl font-bold text-white mb-2">Lamborghini Urus</h3>
+                    <p className="text-white/90 max-w-2xl">
+                      Our premium interior and exterior detailing package brings out the best in this stunning performance SUV, 
+                      enhancing its vibrant orange finish and pristine interior.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Gallery Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="rounded-xl overflow-hidden border border-shine-gold/30 shadow-lg relative">
+                  <div className="relative h-[300px]">
+                    <Image
+                      src="/IMG_1291.jpg"
+                      alt="Lamborghini Urus interior detailing"
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                    <div className="absolute bottom-0 left-0 right-0 p-4">
+                      <h4 className="text-white font-bold">Urus Interior</h4>
+                      <p className="text-white/80 text-sm">Premium leather restoration</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="rounded-xl overflow-hidden border border-shine-gold/30 shadow-lg relative">
+                  <div className="relative h-[300px]">
+                    <Image
+                      src="/IMG_4206.JPEG"
+                      alt="Fiat 124 Spider detailed by Shine Mobile Detailing"
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                    <div className="absolute bottom-0 left-0 right-0 p-4">
+                      <h4 className="text-white font-bold">Fiat 124 Spider</h4>
+                      <p className="text-white/80 text-sm">Convertible paint restoration</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="rounded-xl overflow-hidden border border-shine-gold/30 shadow-lg relative">
+                  <div className="relative h-[300px]">
+                    <Image
+                      src="/IMG_4781.jpg"
+                      alt="Hyundai Elantra detailed by Shine Mobile Detailing"
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                    <div className="absolute bottom-0 left-0 right-0 p-4">
+                      <h4 className="text-white font-bold">Hyundai Elantra</h4>
+                      <p className="text-white/80 text-sm">Showroom finish detailing</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="rounded-xl overflow-hidden border border-shine-gold/30 shadow-lg relative">
+                  <div className="relative h-[300px]">
+                    <Image
+                      src="/IMG_6807.JPG"
+                      alt="Ford F-150 Raptor detailed by Shine Mobile Detailing"
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                    <div className="absolute bottom-0 left-0 right-0 p-4">
+                      <h4 className="text-white font-bold">Ford F-150 Raptor</h4>
+                      <p className="text-white/80 text-sm">Truck detail package</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-12 text-center">
+                <Link href="/#contact" className="btn bg-shine-gold border-shine-gold text-shine-dark hover:bg-transparent hover:text-shine-gold btn-lg">
+                  Book Your Detail Today
+                </Link>
+              </div>
+            </div>
+          </section>
+
           {/* Before and After Showcase */}
           <section className="py-24 bg-black">
             <div className="max-w-7xl mx-auto px-8">
@@ -666,118 +778,6 @@ export default function Page() {
                   <h3 className="text-xl font-bold mb-4 text-white">3. Enjoy Your Shining Car</h3>
                   <p className="text-white/80">Relax while we transform your vehicle. When we&apos;re done, you&apos;ll have a brilliantly clean car without leaving home.</p>
                 </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Portfolio Showcase Section - replacing the removed Booking CTA */}
-          <section id="portfolio" className="py-24 bg-gradient-to-r from-black to-shine-dark/90 relative overflow-hidden">
-            <div className="max-w-7xl mx-auto px-8">
-              <div className="text-center mb-16">
-                <h3 className="text-shine-gold font-semibold mb-4">OUR PORTFOLIO</h3>
-                <h2 className="text-3xl font-bold text-white mb-4">Luxury Vehicles We&apos;ve Detailed</h2>
-                <p className="text-lg text-white/80 max-w-3xl mx-auto">
-                  We take pride in treating every vehicle with the same level of care and attention to detail, from everyday cars to exotic supercars.
-                </p>
-              </div>
-
-              {/* Featured Vehicle Spotlight */}
-              <div className="mb-16 overflow-hidden rounded-xl border-2 border-shine-gold shadow-2xl">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10"></div>
-                  <div className="relative h-[60vh] w-full">
-                    <Image
-                      src="/IMG_1287.jpg"
-                      alt="Lamborghini Urus detailed by Shine Mobile Detailing"
-                      fill
-                      className="object-cover"
-                      priority
-                    />
-                  </div>
-                  <div className="absolute bottom-0 left-0 right-0 p-8 z-20">
-                    <div className="inline-block bg-shine-gold/90 px-4 py-2 rounded-lg text-shine-dark font-bold mb-4">
-                      Featured Detail
-                    </div>
-                    <h3 className="text-3xl font-bold text-white mb-2">Lamborghini Urus</h3>
-                    <p className="text-white/90 max-w-2xl">
-                      Our premium interior and exterior detailing package brings out the best in this stunning performance SUV, 
-                      enhancing its vibrant orange finish and pristine interior.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Gallery Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div className="rounded-xl overflow-hidden border border-shine-gold/30 shadow-lg group relative">
-                  <div className="relative h-[300px]">
-                    <Image
-                      src="/IMG_1291.jpg"
-                      alt="Lamborghini Urus interior detailing"
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                      <h4 className="text-white font-bold">Urus Interior</h4>
-                      <p className="text-white/80 text-sm">Premium leather restoration</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="rounded-xl overflow-hidden border border-shine-gold/30 shadow-lg group relative">
-                  <div className="relative h-[300px]">
-                    <Image
-                      src="/IMG_4206.JPEG"
-                      alt="Fiat 124 Spider detailed by Shine Mobile Detailing"
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                      <h4 className="text-white font-bold">Fiat 124 Spider</h4>
-                      <p className="text-white/80 text-sm">Convertible paint restoration</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="rounded-xl overflow-hidden border border-shine-gold/30 shadow-lg group relative">
-                  <div className="relative h-[300px]">
-                    <Image
-                      src="/IMG_4781.jpg"
-                      alt="Hyundai Elantra detailed by Shine Mobile Detailing"
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                      <h4 className="text-white font-bold">Hyundai Elantra</h4>
-                      <p className="text-white/80 text-sm">Showroom finish detailing</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="rounded-xl overflow-hidden border border-shine-gold/30 shadow-lg group relative">
-                  <div className="relative h-[300px]">
-                    <Image
-                      src="/IMG_6807.JPG"
-                      alt="Ford F-150 Raptor detailed by Shine Mobile Detailing"
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                      <h4 className="text-white font-bold">Ford F-150 Raptor</h4>
-                      <p className="text-white/80 text-sm">Truck detail package</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-12 text-center">
-                <Link href="/#contact" className="btn bg-shine-gold border-shine-gold text-shine-dark hover:bg-transparent hover:text-shine-gold btn-lg">
-                  Book Your Detail Today
-                </Link>
               </div>
             </div>
           </section>
