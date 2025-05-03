@@ -20,7 +20,6 @@ export default function Page() {
           { name: "Full Interior Vacuum" },
           { name: "Dashboard & Console Detailing" },
           { name: "Door Panels & Trim Cleaning" },
-          { name: "Carpet & Upholstery Shampooing" },
           { name: "Window Cleaning (Interior)" }
         ]
       },
@@ -32,8 +31,7 @@ export default function Page() {
           { name: "Hand Wash & Dry" },
           { name: "Tire & Wheel Cleaning" },
           { name: "Window Cleaning (Exterior)" },
-          { name: "Paint Decontamination" },
-          { name: "Wax Protection" }
+          
         ]
       },
       both: { 
@@ -45,7 +43,7 @@ export default function Page() {
           { name: "Everything in Interior Package" },
           { name: "Everything in Exterior Package" },
           { name: "Trunk Cleaning" },
-          { name: "Complementary Touch-up Kit" }
+          
         ]
       }
     },
@@ -58,7 +56,6 @@ export default function Page() {
           { name: "Full Interior Vacuum" },
           { name: "Dashboard & Console Detailing" },
           { name: "Door Panels & Trim Cleaning" },
-          { name: "Carpet & Upholstery Shampooing" },
           { name: "Window Cleaning (Interior)" }
         ]
       },
@@ -70,8 +67,7 @@ export default function Page() {
           { name: "Hand Wash & Dry" },
           { name: "Tire & Wheel Cleaning" },
           { name: "Window Cleaning (Exterior)" },
-          { name: "Paint Decontamination" },
-          { name: "Wax Protection" }
+          
         ]
       },
       both: { 
@@ -83,7 +79,7 @@ export default function Page() {
           { name: "Everything in Interior Package" },
           { name: "Everything in Exterior Package" },
           { name: "Cargo Area Cleaning" },
-          { name: "Complementary Touch-up Kit" }
+          
         ]
       }
     },
@@ -96,7 +92,6 @@ export default function Page() {
           { name: "Full Interior Vacuum" },
           { name: "Dashboard & Console Detailing" },
           { name: "Door Panels & Trim Cleaning" },
-          { name: "Carpet & Upholstery Shampooing" },
           { name: "Window Cleaning (Interior)" }
         ]
       },
@@ -108,8 +103,7 @@ export default function Page() {
           { name: "Hand Wash & Dry" },
           { name: "Tire & Wheel Cleaning" },
           { name: "Window Cleaning (Exterior)" },
-          { name: "Paint Decontamination" },
-          { name: "Wax Protection" }
+          
         ]
       },
       both: { 
@@ -121,7 +115,7 @@ export default function Page() {
           { name: "Everything in Interior Package" },
           { name: "Everything in Exterior Package" },
           { name: "Bed/Cargo Area Cleaning" },
-          { name: "Complementary Touch-up Kit" }
+          
         ]
       }
     }
