@@ -331,13 +331,13 @@ export default function Page() {
                   <div className="relative h-[300px]">
                     <Image
                       src="/IMG_6807.JPG"
-                      alt="Ford F-150 Raptor detailed by Shine Mobile Detailing"
+                      alt="Ford F-150 Tremor detailed by Shine Mobile Detailing"
                       fill
                       className="object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
                     <div className="absolute bottom-0 left-0 right-0 p-4">
-                      <h4 className="text-white font-bold">Ford F-150 Raptor</h4>
+                      <h4 className="text-white font-bold">Ford F-150 Tremor</h4>
                       <p className="text-white/80 text-sm">Truck detail package</p>
                     </div>
                   </div>
