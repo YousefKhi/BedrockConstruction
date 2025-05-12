@@ -611,22 +611,7 @@ export default function Page() {
           </section>
 
           {/* Professional Standards Section */}
-          <section className="py-20 bg-shine-dark">
-            <div className="max-w-7xl mx-auto px-8">
-              <div className="bg-black/40 border border-shine-gold/30 rounded-xl p-8 md:p-12">
-                <div className="flex flex-col md:flex-row gap-8 items-center">
-                  <div className="md:w-1/3">
-                    <div className="bg-shine-gold/10 p-8 rounded-full border border-shine-gold/30 inline-flex">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-24 w-24 text-shine-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-                      </svg>
-                    </div>
-                  </div>
-                  
-                </div>
-              </div>
-            </div>
-          </section>
+          
 
           {/* Services */}
           <section id="services" className="py-24 bg-gradient-to-b from-black to-shine-dark content-optimize">
