@@ -603,8 +603,9 @@ export default function Page() {
               </div>
 
               <div className="mt-10 text-center">
-                <Link href="#" className="btn btn-outline border-shine-gold text-shine-gold hover:bg-shine-gold hover:text-shine-dark">
+                <Link href="https://www.google.com/search?q=shine+mobile+detailing&sca_esv=c148ee2db824e130&sxsrf=AHTn8zpOaIC1Myt0Ma_CR3fHagWISgT_gA%3A1747010617346&source=hp&ei=OUQhaJXCEvL8ptQPy8rliQE&iflsig=ACkRmUkAAAAAaCFSSeh1C3ehip-DbyJQns46na5RP96-&oq=shine+&gs_lp=Egdnd3Mtd2l6IgZzaGluZSAqAggAMgoQIxiABBgnGIoFMgUQABiABDIFEC4YgAQyCBAuGIAEGNQCMgUQLhiABDIREC4YgAQYsQMYgwEYxwEYrwEyCBAuGIAEGOUEMgUQLhiABDILEAAYgAQYsQMYgwEyBRAAGIAESKYOUABYuQRwAHgAkAEAmAF0oAHkBKoBAzIuNLgBAcgBAPgBAZgCBqACgwXCAgsQLhiABBjRAxjHAcICERAuGIAEGLEDGNEDGIMBGMcBwgIOEC4YgAQYsQMY0QMYxwHCAhEQLhiABBixAxiDARjUAhiKBcICCBAAGIAEGLEDwgIREC4YgAQYsQMY0QMYxwEYigXCAgcQABiABBgKwgIIEC4YgAQYsQPCAg4QLhiABBixAxiDARjUAsICDhAAGIAEGLEDGIMBGIoFwgILEC4YgAQYsQMYgwGYAwCSBwMyLjSgB4BUsgcDMi40uAeDBQ&sclient=gws-wiz#lrd=0x47c5a3d52f365961:0x3bd8eaf16cad14d7,3,,,," className="btn btn-outline border-shine-gold text-shine-gold hover:bg-shine-gold hover:text-shine-dark">
                   Leave a Review
+
                 </Link>
               </div>
             </div>
