@@ -725,9 +725,6 @@ export default function Page() {
                     <p className="text-white/80 text-sm mb-4">Complete salt and winter grime removal from undercarriage and wheel wells</p>
                     <div className="flex items-center justify-between">
                       <span className="text-2xl font-bold text-shine-gold">$35</span>
-                      <Link href="#contact" className="btn btn-sm bg-transparent border-shine-gold/70 text-shine-gold hover:border-shine-gold">
-                        Add
-                      </Link>
                     </div>
                   </div>
 
@@ -742,9 +739,6 @@ export default function Page() {
                     <p className="text-white/80 text-sm mb-4">4-6 months of protection with advanced hybrid coating technology</p>
                     <div className="flex items-center justify-between">
                       <span className="text-2xl font-bold text-shine-gold">$20</span>
-                      <Link href="#contact" className="btn btn-sm bg-transparent border-shine-gold/70 text-shine-gold hover:border-shine-gold">
-                        Add
-                      </Link>
                     </div>
                   </div>
 
@@ -759,9 +753,6 @@ export default function Page() {
                     <p className="text-white/80 text-sm mb-4">Professional stain removal and odor elimination from all surfaces</p>
                     <div className="flex items-center justify-between">
                       <span className="text-2xl font-bold text-shine-gold">$50</span>
-                      <Link href="#contact" className="btn btn-sm bg-transparent border-shine-gold/70 text-shine-gold hover:border-shine-gold">
-                        Add
-                      </Link>
                     </div>
                   </div>
 
@@ -783,9 +774,6 @@ export default function Page() {
                         <span className="text-shine-gold font-semibold">$50</span>
                       </div>
                     </div>
-                    <Link href="#contact" className="btn btn-sm bg-transparent border-shine-gold/70 text-shine-gold hover:border-shine-gold w-full">
-                      Add
-                    </Link>
                   </div>
                 </div>
 
