@@ -13,7 +13,7 @@ export default function Page() {
   const pricingData = {
     sedan: {
       interior: { 
-        price: 140, 
+        price: 175, 
         name: "Interior Only", 
         description: "Complete interior detailing for sedans",
         features: [
@@ -24,7 +24,7 @@ export default function Page() {
         ]
       },
       exterior: { 
-        price: 55, 
+        price: 65, 
         name: "Exterior Only", 
         description: "Complete exterior detailing for sedans",
         features: [
@@ -35,7 +35,7 @@ export default function Page() {
         ]
       },
       both: { 
-        price: 185, 
+        price: 220, 
         name: "Interior + Exterior", 
         description: "Complete interior and exterior detailing for sedans", 
         isFeatured: true,
@@ -49,7 +49,7 @@ export default function Page() {
     },
     suv: {
       interior: { 
-        price: 170, 
+        price: 190, 
         name: "Interior Only", 
         description: "Complete interior detailing for SUVs",
         features: [
@@ -60,7 +60,7 @@ export default function Page() {
         ]
       },
       exterior: { 
-        price: 55, 
+        price: 85, 
         name: "Exterior Only", 
         description: "Complete exterior detailing for SUVs",
         features: [
@@ -71,7 +71,7 @@ export default function Page() {
         ]
       },
       both: { 
-        price: 215, 
+        price: 255, 
         name: "Interior + Exterior", 
         description: "Complete interior and exterior detailing for SUVs", 
         isFeatured: true,
@@ -85,7 +85,7 @@ export default function Page() {
     },
     truck: {
       interior: { 
-        price: 190, 
+        price: 200, 
         name: "Interior Only", 
         description: "Complete interior detailing for trucks and vans",
         features: [
@@ -96,7 +96,7 @@ export default function Page() {
         ]
       },
       exterior: { 
-        price: 70, 
+        price: 110, 
         name: "Exterior Only", 
         description: "Complete exterior detailing for trucks and vans",
         features: [
@@ -107,7 +107,7 @@ export default function Page() {
         ]
       },
       both: { 
-        price: 250, 
+        price: 265, 
         name: "Interior + Exterior", 
         description: "Complete interior and exterior detailing for trucks and vans", 
         isFeatured: true,
@@ -702,6 +702,98 @@ export default function Page() {
                     </div>
                   );
                 })}
+              </div>
+
+              {/* Add-ons Section */}
+              <div className="mt-16">
+                <div className="text-center mb-12">
+                  <h3 className="text-2xl font-bold text-white mb-4">Additional Services</h3>
+                  <p className="text-white/80 max-w-2xl mx-auto">
+                    Enhance your detailing experience with these premium add-on services. All add-ons can be combined with any package.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {/* Salt Removal */}
+                  <div className="bg-black/70 border border-shine-gold/30 rounded-xl p-6 hover:border-shine-gold/60 transition-all">
+                    <div className="bg-shine-gold/10 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-shine-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                      </svg>
+                    </div>
+                    <h4 className="text-lg font-bold text-white mb-2">Salt Removal</h4>
+                    <p className="text-white/80 text-sm mb-4">Complete salt and winter grime removal from undercarriage and wheel wells</p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-2xl font-bold text-shine-gold">$35</span>
+                      <Link href="#contact" className="btn btn-sm bg-transparent border-shine-gold/70 text-shine-gold hover:border-shine-gold">
+                        Add
+                      </Link>
+                    </div>
+                  </div>
+
+                  {/* Wax Ceramic Hybrid Coating */}
+                  <div className="bg-black/70 border border-shine-gold/30 rounded-xl p-6 hover:border-shine-gold/60 transition-all">
+                    <div className="bg-shine-gold/10 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-shine-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m-9 0h10m-10 0a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V6a2 2 0 00-2-2M9 12l2 2 4-4" />
+                      </svg>
+                    </div>
+                    <h4 className="text-lg font-bold text-white mb-2">Wax Ceramic Hybrid Coating</h4>
+                    <p className="text-white/80 text-sm mb-4">4-6 months of protection with advanced hybrid coating technology</p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-2xl font-bold text-shine-gold">$20</span>
+                      <Link href="#contact" className="btn btn-sm bg-transparent border-shine-gold/70 text-shine-gold hover:border-shine-gold">
+                        Add
+                      </Link>
+                    </div>
+                  </div>
+
+                  {/* Stain & Odor Removal */}
+                  <div className="bg-black/70 border border-shine-gold/30 rounded-xl p-6 hover:border-shine-gold/60 transition-all">
+                    <div className="bg-shine-gold/10 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-shine-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                      </svg>
+                    </div>
+                    <h4 className="text-lg font-bold text-white mb-2">Stain & Odor Removal</h4>
+                    <p className="text-white/80 text-sm mb-4">Professional stain removal and odor elimination from all surfaces</p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-2xl font-bold text-shine-gold">$50</span>
+                      <Link href="#contact" className="btn btn-sm bg-transparent border-shine-gold/70 text-shine-gold hover:border-shine-gold">
+                        Add
+                      </Link>
+                    </div>
+                  </div>
+
+                  {/* Pet Hair Removal */}
+                  <div className="bg-black/70 border border-shine-gold/30 rounded-xl p-6 hover:border-shine-gold/60 transition-all">
+                    <div className="bg-shine-gold/10 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-shine-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                      </svg>
+                    </div>
+                    <h4 className="text-lg font-bold text-white mb-2">Pet Hair Removal</h4>
+                    <div className="space-y-3 mb-4">
+                      <div className="flex items-center justify-between">
+                        <span className="text-white/90 text-sm">Light Pet Hair</span>
+                        <span className="text-shine-gold font-semibold">$25</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-white/90 text-sm">Complete Pet Hair</span>
+                        <span className="text-shine-gold font-semibold">$50</span>
+                      </div>
+                    </div>
+                    <Link href="#contact" className="btn btn-sm bg-transparent border-shine-gold/70 text-shine-gold hover:border-shine-gold w-full">
+                      Add
+                    </Link>
+                  </div>
+                </div>
+
+                <div className="mt-8 text-center">
+                  <p className="text-white/60 text-sm">
+                    * All add-ons are available with any detailing package. Contact us for custom combinations.
+                  </p>
+                </div>
               </div>
             </div>
           </section>
