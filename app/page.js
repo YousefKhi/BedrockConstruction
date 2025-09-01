@@ -2,962 +2,969 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import config from "@/config";
+import ContactForm from "@/components/ContactForm";
 
 export default function Page() {
-  const [showAfter, setShowAfter] = useState(false);
-  const [showAfter2, setShowAfter2] = useState(false);
-  const [vehicleType, setVehicleType] = useState("sedan");
+  const [scrolled, setScrolled] = useState(false);
+  const [hoveredService, setHoveredService] = useState(null);
 
-  // Pricing data based on vehicle type
-  const pricingData = {
-    sedan: {
-      interior: { 
-        price: 175, 
-        name: "Interior Only", 
-        description: "Complete interior detailing for sedans",
-        features: [
-          { name: "Full Interior Vacuum" },
-          { name: "Dashboard & Console Detailing" },
-          { name: "Door Panels & Trim Cleaning" },
-          { name: "Window Cleaning (Interior)" }
-        ]
-      },
-      exterior: { 
-        price: 65, 
-        name: "Exterior Only", 
-        description: "Complete exterior detailing for sedans",
-        features: [
-          { name: "Hand Wash & Dry" },
-          { name: "Tire & Wheel Cleaning" },
-          { name: "Window Cleaning (Exterior)" },
-          
-        ]
-      },
-      both: { 
-        price: 220, 
-        name: "Interior + Exterior", 
-        description: "Complete interior and exterior detailing for sedans", 
-        isFeatured: true,
-        features: [
-          { name: "Everything in Interior Package" },
-          { name: "Everything in Exterior Package" },
-          { name: "Trunk Cleaning" },
-          
-        ]
-      }
+  const serviceDetails = {
+    concrete: {
+      title: "CONCRETE SERVICES",
+      description: "BROOM FINISH & STAMPED CONCRETE SOLUTIONS",
+      features: [
+        "Broom Finish Concrete",
+        "Stamped Concrete Patterns",
+        "Driveways & Walkways",
+        "Patios & Slabs", 
+        "Commercial Concrete"
+      ]
     },
-    suv: {
-      interior: { 
-        price: 190, 
-        name: "Interior Only", 
-        description: "Complete interior detailing for SUVs",
-        features: [
-          { name: "Full Interior Vacuum" },
-          { name: "Dashboard & Console Detailing" },
-          { name: "Door Panels & Trim Cleaning" },
-          { name: "Window Cleaning (Interior)" }
-        ]
-      },
-      exterior: { 
-        price: 85, 
-        name: "Exterior Only", 
-        description: "Complete exterior detailing for SUVs",
-        features: [
-          { name: "Hand Wash & Dry" },
-          { name: "Tire & Wheel Cleaning" },
-          { name: "Window Cleaning (Exterior)" },
-          
-        ]
-      },
-      both: { 
-        price: 255, 
-        name: "Interior + Exterior", 
-        description: "Complete interior and exterior detailing for SUVs", 
-        isFeatured: true,
-        features: [
-          { name: "Everything in Interior Package" },
-          { name: "Everything in Exterior Package" },
-          { name: "Cargo Area Cleaning" },
-          
-        ]
-      }
+    stone: {
+      title: "STONE & PAVERS",
+      description: "RETAINING WALLS & STONE INSTALLATION",
+      features: [
+        "Patio & Walkway Pavers",
+        "Retaining Walls",
+        "Natural Stone Work",
+        "Custom Stone Features",
+      ]
     },
-    truck: {
-      interior: { 
-        price: 200, 
-        name: "Interior Only", 
-        description: "Complete interior detailing for trucks and vans",
-        features: [
-          { name: "Full Interior Vacuum" },
-          { name: "Dashboard & Console Detailing" },
-          { name: "Door Panels & Trim Cleaning" },
-          { name: "Window Cleaning (Interior)" }
-        ]
-      },
-      exterior: { 
-        price: 110, 
-        name: "Exterior Only", 
-        description: "Complete exterior detailing for trucks and vans",
-        features: [
-          { name: "Hand Wash & Dry" },
-          { name: "Tire & Wheel Cleaning" },
-          { name: "Window Cleaning (Exterior)" },
-          
-        ]
-      },
-      both: { 
-        price: 265, 
-        name: "Interior + Exterior", 
-        description: "Complete interior and exterior detailing for trucks and vans", 
-        isFeatured: true,
-        features: [
-          { name: "Everything in Interior Package" },
-          { name: "Everything in Exterior Package" },
-          { name: "Bed/Cargo Area Cleaning" },
-          
-        ]
-      }
+    decks: {
+      title: "DECK CONSTRUCTION",
+      description: "CUSTOM DECKS & OUTDOOR LIVING SPACES",
+      features: [
+        "Custom Deck Design",
+        "Composite & Wood Decking",
+        "Railings & Stairs",
+        "Gazebos & Pergolas",
+        "Deck Repairs & Maintenance",
+        "Multi-Level Decks",
+        "Outdoor Living Spaces"
+      ]
+    },
+    landscape: {
+      title: "LANDSCAPE & SOD",
+      description: "COMPLETE LANDSCAPING & SOD INSTALLATION",
+      features: [
+        "Landscape Design",
+        "Sod Installation",
+        "Mulch Installation",
+        "Drainage Solutions",
+        "Outdoor Living Spaces",
+        "Garden Design",
+      ]
     }
   };
 
-  // Current pricing based on selected vehicle type
-  const currentPricing = [
-    pricingData[vehicleType].exterior,
-    pricingData[vehicleType].both,
-    pricingData[vehicleType].interior
-  ];
+
+
+  // Simple scroll detection for header
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 100);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <>
-      <div className="min-h-screen bg-shine-dark text-white">
-        <header className="p-4 flex justify-between items-center max-w-7xl mx-auto">
-          <div className="flex items-center gap-2">
-            
-              <Image src="/icon.png" width={50} height={50} alt="Shine Mobile Detailing Logo" />
-            
-            <span className="font-bold text-xl text-white">Shine Mobile Detailing</span>
-          </div>
-          <nav className="hidden md:flex items-center gap-8">
-            <Link href="#about" className="text-white hover:text-shine-gold transition-colors">About</Link>
-            <Link href="#services" className="text-white hover:text-shine-gold transition-colors">Services</Link>
-            <Link href="#faq" className="text-white hover:text-shine-gold transition-colors">FAQ</Link>
-            <Link href="#contact" className="text-white hover:text-shine-gold transition-colors">Contact</Link>
-            <Link href="#reviews" className="text-white hover:text-shine-gold transition-colors">Reviews</Link>
-          </nav>
-          <Link href="#contact" className="btn border-shine-gold bg-transparent text-shine-gold hover:bg-shine-gold hover:text-shine-dark">
-            Book Now
-          </Link>
-      </header>
-
-      <main>
-          {/* Hero Section */}
-          <section className="relative py-28">
-            <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent z-10"></div>
-            <div className="absolute inset-0">
-              <Image 
-                src="/porshce.png" 
-                alt="Luxury car detailing" 
-                fill
-                className="object-cover object-center scale-x-[-1]"
-                priority
-                style={{ opacity: 0.5 }}
-                sizes="100vw"
-                quality={80}
-              />
-            </div>
-
-            <div className="max-w-7xl mx-auto px-8 relative z-20">
-              <div className="max-w-3xl flex flex-col gap-8">
-                <h1 className="text-4xl md:text-6xl font-extrabold text-white">
-                  LUXURY AUTO DETAILING <span className="text-shine-gold">AT YOUR DOORSTEP</span>
-                </h1>
-                <p className="text-lg text-white/80 leading-relaxed">
-                  Experience premium mobile detailing that comes to you. We transform your vehicle with meticulous care and professional service, all without you having to leave your home.
-                </p>
-                <div className="flex gap-4">
-                  <Link href="#contact" className="btn bg-shine-gold border-shine-gold text-shine-dark hover:bg-transparent hover:text-shine-gold btn-lg">
-                    Schedule Now
-                  </Link>
-                  <Link href="#contact" className="btn btn-outline border-white text-white hover:border-shine-gold hover:text-shine-gold btn-lg">
-                    Call Now
-                  </Link>
-                </div>
-
-                
-              </div>
-            </div>
-          </section>
-
-          {/* What We Believe In */}
-          <section className="py-24 bg-black">
-            <div className="max-w-7xl mx-auto px-8 text-center">
-              <h3 className="text-shine-gold font-semibold mb-4">OUR COMMITMENT</h3>
-              <p className="text-3xl md:text-5xl font-bold max-w-4xl mx-auto text-white">
-                &quot;We&apos;re all about making your life easier while delivering <span className="text-shine-gold">unmatched care</span> that leaves your car <span className="text-shine-gold">shining like never before.</span>&quot;
-              </p>
-
-              {/* Trust Badges Section */}
-              
-            </div>
-          </section>
-
-          {/* About Section */}
-          <section id="about" className="py-24 bg-shine-dark">
-            <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              <div>
-                <h3 className="text-shine-gold font-semibold mb-4">ABOUT</h3>
-                <h2 className="text-3xl font-bold mb-6 text-white">Who We Are</h2>
-                <p className="text-lg mb-6 text-white/80">
-                  At Shine Mobile Detailing, we&apos;re passionate about making car care stress-free and convenient for customers across the area. Our mission is simple: to help you keep your car clean, protected, and looking its best without the hassle of driving to a shop or coordinating drop-offs and pick-ups.
-                </p>
-                <p className="text-lg mb-8 text-white/80">
-                  Our team of expert detailers brings years of experience and a dedication to perfection with every service. We use only premium products and techniques to ensure your vehicle receives the care it deserves.
-                </p>
-                <Link href="#services" className="btn bg-shine-gold border-shine-gold text-shine-dark hover:bg-transparent hover:text-shine-gold">
-                  Our Services
-                </Link>
-              </div>
-              <div className="rounded-lg overflow-hidden border border-shine-gold/30">
-                <div className="w-full h-[400px] relative">
+      <div className="min-h-screen bg-white">
+        {/* Dynamic Header with Framer Motion Logo Transition */}
+        <motion.header 
+          className="fixed top-0 left-0 right-0 z-50"
+          animate={{
+            backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.95)' : 'rgba(255, 255, 255, 0)',
+            backdropFilter: scrolled ? 'blur(12px)' : 'blur(0px)',
+            borderBottom: scrolled ? '1px solid rgba(229, 231, 235, 1)' : '1px solid rgba(229, 231, 235, 0)',
+            boxShadow: scrolled ? '0 20px 25px -5px rgba(0, 0, 0, 0.1)' : '0 0px 0px 0px rgba(0, 0, 0, 0)'
+          }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div 
+              className="flex justify-between items-center"
+              animate={{ 
+                paddingTop: scrolled ? '16px' : '24px',
+                paddingBottom: scrolled ? '16px' : '24px'
+              }}
+              transition={{ duration: 0.3 }}
+            >
+              {/* Animated Logo Transition */}
+              <motion.div 
+                className="flex items-center space-x-3"
+                animate={{ scale: scrolled ? 0.9 : 1 }}
+                transition={{ duration: 0.3 }}
+              >
+                <motion.div
+                  animate={{
+                    width: scrolled ? 180 : 220,
+                    height: scrolled ? 90 : 110
+                  }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  className="relative"
+                >
                   <Image 
-                    src="/IMG_6813.JPG" 
-                    alt="Shine Mobile Detailing team member" 
+                    src="/337381986_1149718553095476_491873017312997509_n.jpg"
+                    alt="Bedrock Construction Logo" 
                     fill
-                    className="object-cover object-center scale-[0.8] animate-hardware"
-                    style={{ objectPosition: "50% 40%" }}
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    quality={75}
-                    loading="eager"
+                    className="object-contain"
+                    priority
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-60"></div>
+                </motion.div>
+              </motion.div>
+              
+              {/* Navigation */}
+              <nav className="hidden md:flex items-center space-x-8">
+                <Link href="#home" className={`font-medium transition-colors duration-300 ${
+                  scrolled 
+                    ? 'text-gray-700 hover:text-gray-900' 
+                    : 'text-white hover:text-gray-200'
+                }`}>HOME</Link>
+                <Link href="#about" className={`font-medium transition-colors duration-300 ${
+                  scrolled 
+                    ? 'text-gray-700 hover:text-gray-900' 
+                    : 'text-white hover:text-gray-200'
+                }`}>ABOUT US</Link>
+                <Link href="#services" className={`font-medium transition-colors duration-300 ${
+                  scrolled 
+                    ? 'text-gray-700 hover:text-gray-900' 
+                    : 'text-white hover:text-gray-200'
+                }`}>OUR SERVICES</Link>
+                <Link href="#work" className={`font-medium transition-colors duration-300 ${
+                  scrolled 
+                    ? 'text-gray-700 hover:text-gray-900' 
+                    : 'text-white hover:text-gray-200'
+                }`}>OUR WORK</Link>
+                <Link href="#contact" className={`font-medium transition-colors duration-300 ${
+                  scrolled 
+                    ? 'text-gray-700 hover:text-gray-900' 
+                    : 'text-white hover:text-gray-200'
+                }`}>CONTACT US</Link>
+              </nav>
+
+              {/* Contact Info */}
+              <motion.div 
+                className="hidden lg:flex items-center space-x-4"
+                animate={{ scale: scrolled ? 0.9 : 1 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="text-right">
+                  <p className={`font-bold transition-colors duration-300 ${
+                    scrolled 
+                      ? 'text-base text-gray-900' 
+                      : 'text-lg text-white'
+                  }`}>
+                    {config.contact.phone1}
+                  </p>
+                  <p className={`transition-colors duration-300 ${
+                    scrolled 
+                      ? 'text-xs text-gray-600' 
+                      : 'text-sm text-white/80'
+                  }`}>
+                    {config.contact.phone2}
+                  </p>
                 </div>
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300 ${
+                  scrolled 
+                    ? 'bg-gray-900 hover:bg-black' 
+                    : 'bg-white/20 backdrop-blur-sm hover:bg-white/30'
+                }`}>
+                  <svg className={`w-5 h-5 transition-colors duration-300 ${
+                    scrolled ? 'text-white' : 'text-white'
+                  }`} fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                  </svg>
+                </div>
+              </motion.div>
+
+              {/* Mobile Menu Button */}
+              <div className="md:hidden">
+                <button className={`transition-colors ${
+                  scrolled 
+                    ? 'text-gray-700 hover:text-gray-900' 
+                    : 'text-white hover:text-gray-200'
+                }`}>
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                </button>
               </div>
+            </motion.div>
+          </div>
+        </motion.header>
+
+        <main>
+          {/* Hero Section */}
+          <section id="home" className="relative h-screen bg-gray-900 overflow-hidden">
+            <div className="absolute inset-0">
+              <Image
+                src="/2025-07-07-18-04-58-909.PNG"
+                alt="Beautiful home with custom deck construction"
+                fill
+                className="object-cover blur-sm scale-105"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/50"></div>
             </div>
-          </section>
 
-          {/* Portfolio Showcase Section */}
-          <section id="portfolio" className="py-24 bg-gradient-to-r from-black to-shine-dark/90 relative overflow-hidden">
-            <div className="max-w-7xl mx-auto px-8">
-              <div className="text-center mb-16">
-                <h3 className="text-shine-gold font-semibold mb-4">OUR PORTFOLIO</h3>
-                <h2 className="text-3xl font-bold text-white mb-4">Vehicles We&apos;ve Detailed</h2>
-                <p className="text-lg text-white/80 max-w-3xl mx-auto">
-                  We take pride in treating every vehicle with the same level of care and attention to detail, from everyday cars to exotic supercars.
-                </p>
-              </div>
-
-              {/* Featured Vehicle Spotlight */}
-              <div className="mb-16 overflow-hidden rounded-xl border-2 border-shine-gold shadow-2xl">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10"></div>
-                  <div className="relative h-[60vh] w-full">
-                    <Image
-                      src="/IMG_1287.jpg"
-                      alt="Lamborghini Urus detailed by Shine Mobile Detailing"
-                      fill
-                      className="object-cover object-center animate-hardware"
-                      priority
-                      sizes="100vw"
-                      quality={80}
-                    />
+            <div className="relative z-10 h-full flex items-center">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="max-w-6xl">
+                  {/* Company Name Above Main Heading */}
+                  <div className="text-right mb-8 hero-text-slide">
+                    <p className="text-gray-300 text-xl md:text-2xl font-bold tracking-widest">BEDROCK CONSTRUCTION</p>
                   </div>
-                  <div className="absolute bottom-0 left-0 right-0 p-8 z-20">
-                    <div className="inline-block bg-shine-gold/90 px-4 py-2 rounded-lg text-shine-dark font-bold mb-4 hidden md:inline-block">
-                      Featured Detail
-                    </div>
-                    <h3 className="text-3xl font-bold text-white mb-2">Lamborghini Urus</h3>
-                    <p className="text-white/90 max-w-2xl">
-                      Our premium interior and exterior detailing package brings out the best in this stunning performance SUV, 
-                      enhancing its vibrant orange finish and pristine interior.
+                  
+                  <div className="text-right mb-6">
+                    <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-tight hero-text-slide">
+                      YOUR VISION,
+                      <br />
+                      <span className="text-gray-300">OUR CRAFT!</span>
+                    </h1>
+                  </div>
+                  
+                  <div className="text-right">
+                    <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed max-w-4xl ml-auto hero-subtitle-slide">
+                      Expert <strong className="text-white">construction</strong> and 
+                      <strong className="text-white"> landscape</strong> services for 
+                      <strong className="text-white"> residential</strong> and commercial projects in Fredericton and surrounding areas.
                     </p>
                   </div>
-                </div>
-              </div>
-
-              {/* Gallery Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div className="rounded-xl overflow-hidden border border-shine-gold/30 shadow-lg relative">
-                  <div className="relative h-[300px]">
-                    <Image
-                      src="/IMG_1291.jpg"
-                      alt="Lamborghini Urus interior detailing"
-                      fill
-                      className="object-cover animate-hardware"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                      quality={75}
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                    <div className="absolute bottom-0 left-0 right-0 p-4">
-                      <h4 className="text-white font-bold">Urus Interior</h4>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="rounded-xl overflow-hidden border border-shine-gold/30 shadow-lg relative">
-                  <div className="relative h-[300px]">
-                    <Image
-                      src="/IMG_4206.JPEG"
-                      alt="Fiat 124 Spider detailed by Shine Mobile Detailing"
-                      fill
-                      className="object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                    <div className="absolute bottom-0 left-0 right-0 p-4">
-                      <h4 className="text-white font-bold">Fiat 124 Spider</h4>
-                      
-                    </div>
-                  </div>
-                </div>
-
-                <div className="rounded-xl overflow-hidden border border-shine-gold/30 shadow-lg relative">
-                  <div className="relative h-[300px]">
-                    <Image
-                      src="/IMG_4781.jpg"
-                      alt="Hyundai Elantra detailed by Shine Mobile Detailing"
-                      fill
-                      className="object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                    <div className="absolute bottom-0 left-0 right-0 p-4">
-                      <h4 className="text-white font-bold">Hyundai Elantra</h4>
-                      <p className="text-white/80 text-sm">Showroom finish detailing</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="rounded-xl overflow-hidden border border-shine-gold/30 shadow-lg relative">
-                  <div className="relative h-[300px]">
-                    <Image
-                      src="/IMG_6807.JPG"
-                      alt="Ford F-150 Tremor detailed by Shine Mobile Detailing"
-                      fill
-                      className="object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                    <div className="absolute bottom-0 left-0 right-0 p-4">
-                      <h4 className="text-white font-bold">Ford F-150 Tremor</h4>
-                      <p className="text-white/80 text-sm">Truck detail package</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-12 text-center">
-                <Link href="/#contact" className="btn bg-shine-gold border-shine-gold text-shine-dark hover:bg-transparent hover:text-shine-gold btn-lg">
-                  Book Your Detail Today
-                </Link>
-              </div>
-            </div>
-          </section>
-
-          {/* Before and After Showcase */}
-          <section className="py-24 bg-black">
-            <div className="max-w-7xl mx-auto px-8">
-              <div className="text-center mb-16">
-                <h3 className="text-shine-gold font-semibold mb-4">WHAT WE DO</h3>
-                <h2 className="text-3xl font-bold text-white mb-4">Before & After Transformations</h2>
-                <p className="text-lg text-white/80 max-w-3xl mx-auto">
-                  See the difference our premium detailing services make. Swipe or hover over images to see the dramatic transformation.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                {/* First Before/After Card */}
-                <div 
-                  className={`group relative h-[500px] rounded-xl overflow-hidden border border-shine-gold/30 shadow-xl cursor-pointer ${showAfter ? 'after-visible' : ''}`} 
-                  onClick={() => setShowAfter(!showAfter)}
-                >
-                  <div className={`absolute inset-0 bg-black/50 z-10 flex items-center justify-center transition-opacity duration-500 ${showAfter ? 'opacity-0' : 'opacity-100'} md:group-hover:opacity-0`}>
-                    <div className="text-center px-6">
-                      <h3 className="text-2xl font-bold text-white mb-2">Interior Detailing</h3>
-                      <p className="text-white/80 mb-4">We restore your vehicle&apos;s interior to showroom condition</p>
-                      <span className="inline-block text-shine-gold border-2 border-shine-gold px-6 py-3 rounded-full text-base font-bold shadow-lg bg-black/70 hover:bg-shine-gold hover:text-black transition-colors">
-                        {showAfter ? 'Show Before' : 'Show After'}
-                      </span>
-                    </div>
-                  </div>
                   
-                  {/* Before Image */}
-                  <div className={`absolute inset-0 z-0 transition-opacity duration-500 ${showAfter ? 'opacity-0' : 'opacity-100'} md:group-hover:opacity-0 animate-hardware`}>
-                    <Image 
-                      src="/IMG_6822.JPG" 
-                      alt="Before interior detailing" 
-                      fill
-                      className="object-cover object-center"
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      quality={75}
-                    />
-                  </div>
-                  
-                  {/* After Image - Initially hidden, shown on hover */}
-                  <div className={`absolute inset-0 z-0 transition-opacity duration-500 ${showAfter ? 'opacity-100' : 'opacity-0'} md:group-hover:opacity-100 animate-hardware`}>
-                    <Image 
-                      src="/IMG_6823.JPG" 
-                      alt="After interior detailing" 
-                      fill
-                      className="object-cover object-center"
-                    />
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-6">
-                      <p className="text-shine-gold text-xl font-bold tracking-wider flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                        AFTER
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* First Card Information Panel */}
-                <div className="flex flex-col justify-center p-8 bg-shine-dark/50 rounded-xl border border-shine-gold/30">
-                  <h3 className="text-2xl font-bold text-white mb-6">The Shine Difference</h3>
-                  <ul className="space-y-4">
-                    <li className="flex items-start gap-3">
-                      <div className="bg-shine-gold/20 p-2 rounded-full mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-shine-gold" viewBox="0 0 20 20" fill="currentColor">
-                          <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                      <div>
-                        <h4 className="text-lg font-semibold text-white">Meticulous Attention to Detail</h4>
-                        <p className="text-white/80">We clean every crevice and surface, restoring your car&apos;s interior to like-new condition.</p>
-                      </div>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <div className="bg-shine-gold/20 p-2 rounded-full mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-shine-gold" viewBox="0 0 20 20" fill="currentColor">
-                          <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                      <div>
-                        <h4 className="text-lg font-semibold text-white">Premium Products</h4>
-                        <p className="text-white/80">We use only professional-grade cleaning agents and conditioners that protect surfaces.</p>
-                      </div>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <div className="bg-shine-gold/20 p-2 rounded-full mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-shine-gold" viewBox="0 0 20 20" fill="currentColor">
-                          <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                      <div>
-                        <h4 className="text-lg font-semibold text-white">Advanced Equipment</h4>
-                        <p className="text-white/80">Our professional-grade equipment extracts dirt from deep within carpets and upholstery.</p>
-                      </div>
-                    </li>
-                  </ul>
-                  <div className="mt-8">
-                    <Link href="#services" className="btn bg-shine-gold border-shine-gold text-shine-dark hover:bg-transparent hover:text-shine-gold">
-                      Explore Our Services
+                  <div className="flex flex-col sm:flex-row gap-4 hero-subtitle-slide justify-end">
+                    <Link 
+                      href="#contact" 
+                      className="bg-white text-black px-8 py-4 rounded-md font-bold text-lg hover:bg-gray-200 transition-all duration-300 hover:scale-105 inline-block text-center"
+                    >
+                      Get Free Quote
+                    </Link>
+                    <Link 
+                      href="#services" 
+                      className="border-2 border-white text-white px-8 py-4 rounded-md font-bold text-lg hover:bg-white hover:text-gray-900 transition-all duration-300 hover:scale-105 inline-block text-center"
+                    >
+                      Our Services
                     </Link>
                   </div>
                 </div>
               </div>
-              
-              {/* Mobile tap instruction - visible only on small screens */}
-              <div className="md:hidden text-center mt-6 mb-16">
-                <p className="text-white/80 text-sm">Tap image to see transformation</p>
-              </div>
-              
-              {/* Second Before/After Row - Added in reverse layout */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-16">
-                {/* Information panel - Now on the left */}
-                <div className="flex flex-col justify-center p-8 bg-shine-dark/50 rounded-xl border border-shine-gold/30 order-2 md:order-1">
-                  <h3 className="text-2xl font-bold text-white mb-6">Exterior Detailing Excellence</h3>
-                  <p className="text-white/80 mb-6">
-                    Our exterior detailing removes built-up dirt, road grime, and contaminants that regular washing can&apos;t eliminate. We restore your vehicle&apos;s showroom shine and protect its surfaces.
-                  </p>
-                  <ul className="space-y-4">
-                    <li className="flex items-start gap-3">
-                      <div className="bg-shine-gold/20 p-2 rounded-full mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-shine-gold" viewBox="0 0 20 20" fill="currentColor">
-                          <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                      <div>
-                        <h4 className="text-lg font-semibold text-white">Hand Washing & Detailing</h4>
-                        <p className="text-white/80">Every vehicle receives a gentle but thorough hand wash and detailing.</p>
-                      </div>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <div className="bg-shine-gold/20 p-2 rounded-full mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-shine-gold" viewBox="0 0 20 20" fill="currentColor">
-                          <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                      <div>
-                        <h4 className="text-lg font-semibold text-white">Paint Protection</h4>
-                        <p className="text-white/80">We apply high-quality waxes and sealants to protect against environmental damage.</p>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-                
-                {/* Second Before/After Card - Now on the right */}
-                <div 
-                  className={`group relative h-[500px] rounded-xl overflow-hidden border border-shine-gold/30 shadow-xl cursor-pointer order-1 md:order-2`} 
-                  onClick={() => setShowAfter2(!showAfter2)}
+            </div>
+          </section>
+
+
+
+          {/* Services Banner Section with TOP TIER Style Layout */}
+          <section className="relative py-32 bg-gray-900 overflow-hidden">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              {/* Desktop Layout */}
+              <div className="hidden lg:grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                {/* Left Side - Services Overview Text */}
+                <motion.div
+                  className="relative h-[600px] flex flex-col justify-center p-12"
+                  initial={{ opacity: 0, x: -100 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
                 >
-                  <div className={`absolute inset-0 bg-black/50 z-10 flex items-center justify-center transition-opacity duration-500 ${showAfter2 ? 'opacity-0' : 'opacity-100'} md:group-hover:opacity-0`}>
-                    <div className="text-center px-6">
-                      <h3 className="text-2xl font-bold text-white mb-2">Exterior Detailing</h3>
-                      <p className="text-white/80 mb-4">We restore your vehicle&apos;s exterior to a brilliant shine</p>
-                      <span className="inline-block text-shine-gold border-2 border-shine-gold px-6 py-3 rounded-full text-base font-bold shadow-lg bg-black/70 hover:bg-shine-gold hover:text-black transition-colors">
-                        {showAfter2 ? 'Show Before' : 'Show After'}
-                      </span>
-                    </div>
-                  </div>
+                  {/* Dynamic Text Content */}
+                  <motion.h2 
+                    className="text-yellow-400 text-2xl font-bold mb-8 tracking-widest"
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                  >
+                    SERVICES
+                  </motion.h2>
                   
-                  {/* Before Image */}
-                  <div className={`absolute inset-0 z-0 transition-opacity duration-500 ${showAfter2 ? 'opacity-0' : 'opacity-100'} md:group-hover:opacity-0 animate-hardware`}>
-                    <Image 
-                      src="/IMG_1211.JPG" 
-                      alt="Before exterior detailing" 
-                      fill
-                      className="object-cover object-center"
-                    />
-                  </div>
+                  <motion.h3 
+                    key={hoveredService || "default"}
+                    className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 leading-tight"
+                    initial={{ opacity: 0, x: -50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    {hoveredService ? serviceDetails[hoveredService].title : (
+                      <>
+                        FROM CONCRETE
+                        <br />
+                        TO COMPLETE
+                        <br />
+                        LANDSCAPE & SOD
+                        <br />
+                        SOLUTIONS
+                      </>
+                    )}
+                  </motion.h3>
                   
-                  {/* After Image */}
-                  <div className={`absolute inset-0 z-0 transition-opacity duration-500 ${showAfter2 ? 'opacity-100' : 'opacity-0'} md:group-hover:opacity-100 animate-hardware`}>
-                    <Image 
-                      src="/IMG_1212.JPG" 
-                      alt="After exterior detailing" 
-                      fill
-                      className="object-cover object-center"
-                    />
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-6">
-                      <p className="text-shine-gold text-xl font-bold tracking-wider flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                        AFTER
-                      </p>
+                  <motion.p 
+                    key={hoveredService ? `${hoveredService}-desc` : "default-desc"}
+                    className="text-2xl md:text-3xl font-bold text-white/90 leading-tight mb-8"
+                    initial={{ opacity: 0, x: -50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    {hoveredService ? serviceDetails[hoveredService].description : (
+                      <>
+                        BROOM FINISH &
+                        <br />
+                        STAMPED CONCRETE
+                        <br />
+                        TO COMPLETE
+                        <br />
+                        LANDSCAPING
+                      </>
+                    )}
+                  </motion.p>
+
+                  {/* Features List - Only show when a service is hovered */}
+                  {hoveredService && (
+                    <motion.div
+                      key={`${hoveredService}-features`}
+                      className="space-y-3"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.2 }}
+                    >
+                      <h4 className="text-lg font-semibold text-yellow-400 mb-4">Our Services Include:</h4>
+                      <div className="grid grid-cols-1 gap-3">
+                        {serviceDetails[hoveredService].features.map((feature, index) => (
+                          <motion.div
+                            key={index}
+                            className="flex items-center space-x-3"
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
+                          >
+                            <div className="w-2 h-2 bg-yellow-400 rounded-full flex-shrink-0"></div>
+                            <span className="text-lg text-white/80">{feature}</span>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </motion.div>
+
+                {/* Right Side - Service Category Cards */}
+                <div className="relative h-[600px]">
+                  {/* Concrete Card */}
+                  <motion.div 
+                    className="group cursor-pointer h-[140px] rounded-2xl overflow-hidden absolute left-0 right-0"
+                    initial={{ opacity: 0, x: 150 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    animate={{
+                      height: hoveredService === 'concrete' ? '600px' : '140px',
+                      opacity: hoveredService === null || hoveredService === 'concrete' ? 1 : 0.3,
+                      scale: hoveredService === 'concrete' ? 1 : 0.95,
+                      top: hoveredService === 'concrete' ? '0px' : '0px',
+                      zIndex: hoveredService === 'concrete' ? 10 : 1
+                    }}
+                    onHoverStart={() => setHoveredService('concrete')}
+                    onHoverEnd={() => setHoveredService(null)}
+                  >
+                    <div className="relative h-full bg-gray-800 overflow-hidden">
+                      <Image
+                        src="/thumbnail_IMG_3054.jpg"
+                        alt="Broom Finish Concrete"
+                        fill
+                        className="object-cover transition-transform duration-100 group-hover:scale-125"
+                      />
+                      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300"></div>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <h4 className="text-2xl font-bold text-white text-center">Concrete</h4>
+                      </div>
                     </div>
-                  </div>
+                  </motion.div>
+
+                  {/* Stone & Pavers Card */}
+                  <motion.div 
+                    className="group cursor-pointer h-[140px] rounded-2xl overflow-hidden absolute left-0 right-0"
+                    initial={{ opacity: 0, x: 150 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    animate={{
+                      height: hoveredService === 'stone' ? '600px' : '140px',
+                      opacity: hoveredService === null || hoveredService === 'stone' ? 1 : 0.3,
+                      scale: hoveredService === 'stone' ? 1 : 0.95,
+                      top: hoveredService === 'stone' ? '0px' : '140px',
+                      zIndex: hoveredService === 'stone' ? 10 : 1
+                    }}
+                    onHoverStart={() => setHoveredService('stone')}
+                    onHoverEnd={() => setHoveredService(null)}
+                  >
+                    <div className="relative h-full bg-gray-800 overflow-hidden">
+                      <Image
+                        src="/IMG_3285.JPG"
+                        alt="Stone & Pavers"
+                        fill
+                        className="object-cover transition-transform duration-100 group-hover:scale-125"
+                      />
+                      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300"></div>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <h4 className="text-2xl font-bold text-white text-center">Stone & Pavers</h4>
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* Decks Card */}
+                  <motion.div 
+                    className="group cursor-pointer h-[140px] rounded-2xl overflow-hidden absolute left-0 right-0"
+                    initial={{ opacity: 0, x: 150 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.8, delay: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    animate={{
+                      height: hoveredService === 'decks' ? '600px' : '140px',
+                      opacity: hoveredService === null || hoveredService === 'decks' ? 1 : 0.3,
+                      scale: hoveredService === 'decks' ? 1 : 0.95,
+                      top: hoveredService === 'decks' ? '0px' : '280px',
+                      zIndex: hoveredService === 'decks' ? 10 : 1
+                    }}
+                    onHoverStart={() => setHoveredService('decks')}
+                    onHoverEnd={() => setHoveredService(null)}
+                  >
+                    <div className="relative h-full bg-gray-800 overflow-hidden">
+                      <Image
+                        src="/2024-07-26-18-06-29-443.PNG"
+                        alt="Custom Deck Construction"
+                        fill
+                        className="object-cover transition-transform duration-100 group-hover:scale-125"
+                      />
+                      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300"></div>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <h4 className="text-2xl font-bold text-white text-center">Decks</h4>
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* Landscape & Sod Card */}
+                  <motion.div 
+                    className="group cursor-pointer h-[140px] rounded-2xl overflow-hidden absolute left-0 right-0"
+                    initial={{ opacity: 0, x: 150 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.8, delay: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    animate={{
+                      height: hoveredService === 'landscape' ? '600px' : '140px',
+                      opacity: hoveredService === 'landscape' ? 1 : 0.3,
+                      scale: hoveredService === 'landscape' ? 1 : 0.95,
+                      top: hoveredService === 'landscape' ? '0px' : '420px',
+                      zIndex: hoveredService === 'landscape' ? 10 : 1
+                    }}
+                    onHoverStart={() => setHoveredService('landscape')}
+                    onHoverEnd={() => setHoveredService(null)}
+                  >
+                    <div className="relative h-full bg-gray-800 overflow-hidden">
+                      <Image
+                        src="/IMG_3287.JPG"
+                        alt="Landscape & Sod Installation"
+                        fill
+                        className="object-cover transition-transform duration-100 group-hover:scale-125"
+                      />
+                      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300"></div>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <h4 className="text-2xl font-bold text-white text-center">Landscape & Sod</h4>
+                      </div>
+                    </div>
+                  </motion.div>
                 </div>
               </div>
-            </div>
-          </section>
 
-          {/* Reviews Section - Moved up in the page */}
-          <section id="reviews" className="py-24 bg-shine-dark content-optimize">
-            <div className="max-w-7xl mx-auto px-8">
-              <div className="text-center mb-16">
-                <h3 className="text-shine-gold font-semibold mb-4">TESTIMONIALS</h3>
-                <h2 className="text-3xl font-bold text-white">What Our Customers Say</h2>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {[
-                  {
-                    name: "Dimma Issam",
-                    date: "a month ago",
-                    img: "/351161829_1633315233844973_4495546105464823509_n.jpg",
-                    text: "Just had the interior and exterior of my car cleaned. The guys are hardworking and their work is meticulous. They did an impeccable job! They go to you, so you dont have to worry about dropping off the car and waiting. The car feels like its brand new! Its super clean and smells so fresh. The detailing is incredible! Im so grateful and will definitely reach out again🥰"
-                  },
-                  {
-                    name: "Katie Ryan",
-                    date: "10 months ago",
-                    img: "/487489073_10165302462182178_1450958078886028743_n.jpg",
-                    text: "Wow! Thank you for making our truck look brand new and incredible! What a great service and highly recommend these guys! These men spent over 3 hours cleaning the inside of our truck and its never looked better. And the best part is they came to us to detail our truck and they booked us in very quickly! A big thank you 😃"
-                  },
-                  {
-                    name: "Tabitha Knowles",
-                    date: "2 months ago",
-                    img: "/465988361_10101481937558265_7673078266829928699_n.jpg",
-                    text: "Wow! I am beyond impressed! I didnt think my vehicle was THAT dirty but I was speechless when I saw it after it was detailed! The guys did an outstanding job, I am so impressed and would recommend them to everyone! They were very professional and great to work with - I will definitely have them clean my Rav again, very reasonably priced for such an amazing job!"
-                  },
-                ].map((review, i) => (
-                  <div key={i} className="bg-black p-6 rounded-xl shadow-lg border border-shine-gold/20">
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className={`w-12 h-12 ${!review.img ? 'bg-shine-dark text-shine-gold border border-shine-gold/50 rounded-full flex items-center justify-center font-bold' : 'relative rounded-full overflow-hidden'}`}>
-                        {review.img ? (
-                          <Image 
-                            src={review.img} 
-                            alt={`${review.name}&apos;s profile`} 
-                            fill
-                            className="object-cover"
-                          />
-                        ) : (
-                          review.name.charAt(0)
-                        )}
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-white">{review.name} {review.age && <span className="text-white/60 text-sm">• {review.age}</span>}</h4>
-                        <p className="text-sm text-white/60">{review.date}</p>
-                      </div>
-                    </div>
-                    <div className="flex mb-4">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <svg key={star} xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-shine-gold" viewBox="0 0 20 20" fill="currentColor">
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                      ))}
-                    </div>
-                    <p className="text-white/80">{review.text}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-10 text-center">
-                <Link href="https://www.google.com/search?q=shine+mobile+detailing&sca_esv=c148ee2db824e130&sxsrf=AHTn8zpOaIC1Myt0Ma_CR3fHagWISgT_gA%3A1747010617346&source=hp&ei=OUQhaJXCEvL8ptQPy8rliQE&iflsig=ACkRmUkAAAAAaCFSSeh1C3ehip-DbyJQns46na5RP96-&oq=shine+&gs_lp=Egdnd3Mtd2l6IgZzaGluZSAqAggAMgoQIxiABBgnGIoFMgUQABiABDIFEC4YgAQyCBAuGIAEGNQCMgUQLhiABDIREC4YgAQYsQMYgwEYxwEYrwEyCBAuGIAEGOUEMgUQLhiABDILEAAYgAQYsQMYgwEyBRAAGIAESKYOUABYuQRwAHgAkAEAmAF0oAHkBKoBAzIuNLgBAcgBAPgBAZgCBqACgwXCAgsQLhiABBjRAxjHAcICERAuGIAEGLEDGNEDGIMBGMcBwgIOEC4YgAQYsQMY0QMYxwHCAhEQLhiABBixAxiDARjUAhiKBcICCBAAGIAEGLEDwgIREC4YgAQYsQMY0QMYxwEYigXCAgcQABiABBgKwgIIEC4YgAQYsQPCAg4QLhiABBixAxiDARjUAsICDhAAGIAEGLEDGIMBGIoFwgILEC4YgAQYsQMYgwGYAwCSBwMyLjSgB4BUsgcDMi40uAeDBQ&sclient=gws-wiz#lrd=0x47c5a3d52f365961:0x3bd8eaf16cad14d7,3,,,," className="btn btn-outline border-shine-gold text-shine-gold hover:bg-shine-gold hover:text-shine-dark">
-                  Leave a Review
-
-                </Link>
-              </div>
-            </div>
-          </section>
-
-          {/* Professional Standards Section */}
-          
-
-          {/* Services */}
-          <section id="services" className="py-24 bg-gradient-to-b from-black to-shine-dark content-optimize">
-            <div className="max-w-7xl mx-auto px-8">
-              <div className="text-center mb-16">
-                <h3 className="text-shine-gold font-semibold mb-4">SERVICES</h3>
-                <h2 className="text-3xl font-bold text-white">Premium Detailing Packages</h2>
-                
-                {/* Vehicle Type Selector */}
-                <div className="mt-8 max-w-xl mx-auto">
-                  <p className="text-white mb-4">Select your vehicle type:</p>
-                  <div className="flex justify-center gap-4 flex-wrap">
-                    <button 
-                      onClick={() => setVehicleType("sedan")} 
-                      className={`px-6 py-3 rounded-full text-sm font-bold transition-all ${
-                        vehicleType === "sedan" 
-                          ? "bg-shine-gold text-shine-dark" 
-                          : "bg-transparent border border-shine-gold/70 text-shine-gold hover:border-shine-gold"
-                      }`}
-                    >
-                      Sedan
-                    </button>
-                    <button 
-                      onClick={() => setVehicleType("suv")} 
-                      className={`px-6 py-3 rounded-full text-sm font-bold transition-all ${
-                        vehicleType === "suv" 
-                          ? "bg-shine-gold text-shine-dark" 
-                          : "bg-transparent border border-shine-gold/70 text-shine-gold hover:border-shine-gold"
-                      }`}
-                    >
-                      SUV
-                    </button>
-                    <button 
-                      onClick={() => setVehicleType("truck")} 
-                      className={`px-6 py-3 rounded-full text-sm font-bold transition-all ${
-                        vehicleType === "truck" 
-                          ? "bg-shine-gold text-shine-dark" 
-                          : "bg-transparent border border-shine-gold/70 text-shine-gold hover:border-shine-gold"
-                      }`}
-                    >
-                      Truck/Van
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {currentPricing.map((plan, i) => {
-                  // Dynamic styling for each card
-                  const isHighlight = plan.isFeatured;
-                  const cardStyle = isHighlight 
-                    ? "bg-gradient-to-br from-shine-gold/10 to-black border-2 border-shine-gold" 
-                    : "bg-black/70 border border-shine-gold/30 hover:border-shine-gold/60";
-                  
-                  return (
-                    <div key={i} className={`rounded-xl shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105 ${cardStyle}`}>
-                      <div className={`p-6 ${isHighlight ? "bg-black/40" : ""}`}>
-                        <div className="mb-3">
-                          {isHighlight && <span className="bg-shine-gold text-shine-dark text-xs font-bold px-3 py-1 rounded-full mb-4 inline-block">MOST POPULAR</span>}
-                        </div>
-                        <h3 className="text-2xl font-bold mb-1 text-white">{plan.name}</h3>
-                        <p className="text-white/80 mb-4">{plan.description}</p>
-                        <div className="flex items-end gap-2 mb-6">
-                          <span className="text-4xl font-bold text-shine-gold">${plan.price}</span>
-                          {plan.priceAnchor && <span className="text-lg line-through opacity-50 text-white/60">${plan.priceAnchor}</span>}
-                        </div>
-                        <Link href="#contact" className={`btn w-full ${isHighlight 
-                          ? "bg-shine-gold border-shine-gold text-shine-dark hover:bg-transparent hover:text-shine-gold" 
-                          : "bg-transparent border-shine-gold/70 text-shine-gold hover:border-shine-gold hover:bg-shine-gold/10"}`}>
-                          Book Now
-                        </Link>
-                      </div>
-                      <div className="p-6 border-t border-shine-gold/20">
-                        <ul className="space-y-3">
-                          {plan.features ? plan.features.map((feature, j) => (
-                            <li key={j} className="flex items-center gap-2 text-white/90">
-                              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-shine-gold" viewBox="0 0 20 20" fill="currentColor">
-                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                              </svg>
-                              <span>{feature.name}</span>
-                            </li>
-                          )) : (
-                            <li className="text-white/90">Contact for details</li>
-                          )}
-                        </ul>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Add-ons Section */}
-              <div className="mt-16">
+              {/* Mobile Layout */}
+              <div className="lg:hidden">
                 <div className="text-center mb-12">
-                  <h3 className="text-2xl font-bold text-white mb-4">Additional Services</h3>
-                  <p className="text-white/80 max-w-2xl mx-auto">
-                    Enhance your detailing experience with these premium add-on services. All add-ons can be combined with any package.
+                  <h2 className="text-yellow-400 text-2xl font-bold mb-6 tracking-widest">SERVICES</h2>
+                  <h3 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
+                    FROM CONCRETE TO COMPLETE LANDSCAPE & SOD SOLUTIONS
+                  </h3>
+                  <p className="text-lg md:text-xl text-white/90 leading-relaxed">
+                    BROOM FINISH & STAMPED CONCRETE TO COMPLETE LANDSCAPING
                   </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {/* Salt Removal */}
-                  <div className="bg-black/70 border border-shine-gold/30 rounded-xl p-6 hover:border-shine-gold/60 transition-all">
-                    <div className="bg-shine-gold/10 w-16 h-16 rounded-full flex items-center justify-center mb-4">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-shine-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-                      </svg>
-                    </div>
-                    <h4 className="text-lg font-bold text-white mb-2">Salt Removal</h4>
-                    <p className="text-white/80 text-sm mb-4">Complete salt and winter grime removal from undercarriage and wheel wells</p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-2xl font-bold text-shine-gold">$35</span>
-                    </div>
-                  </div>
-
-                  {/* Wax Ceramic Hybrid Coating */}
-                  <div className="bg-black/70 border border-shine-gold/30 rounded-xl p-6 hover:border-shine-gold/60 transition-all">
-                    <div className="bg-shine-gold/10 w-16 h-16 rounded-full flex items-center justify-center mb-4">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-shine-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m-9 0h10m-10 0a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V6a2 2 0 00-2-2M9 12l2 2 4-4" />
-                      </svg>
-                    </div>
-                    <h4 className="text-lg font-bold text-white mb-2">Wax Ceramic Hybrid Coating</h4>
-                    <p className="text-white/80 text-sm mb-4">4-6 months of protection with advanced hybrid coating technology</p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-2xl font-bold text-shine-gold">$20</span>
-                    </div>
-                  </div>
-
-                  {/* Stain & Odor Removal */}
-                  <div className="bg-black/70 border border-shine-gold/30 rounded-xl p-6 hover:border-shine-gold/60 transition-all">
-                    <div className="bg-shine-gold/10 w-16 h-16 rounded-full flex items-center justify-center mb-4">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-shine-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                      </svg>
-                    </div>
-                    <h4 className="text-lg font-bold text-white mb-2">Stain & Odor Removal</h4>
-                    <p className="text-white/80 text-sm mb-4">Professional stain removal and odor elimination from all surfaces</p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-2xl font-bold text-shine-gold">$50</span>
-                    </div>
-                  </div>
-
-                  {/* Pet Hair Removal */}
-                  <div className="bg-black/70 border border-shine-gold/30 rounded-xl p-6 hover:border-shine-gold/60 transition-all">
-                    <div className="bg-shine-gold/10 w-16 h-16 rounded-full flex items-center justify-center mb-4">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-shine-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                      </svg>
-                    </div>
-                    <h4 className="text-lg font-bold text-white mb-2">Pet Hair Removal</h4>
-                    <div className="space-y-3 mb-4">
-                      <div className="flex items-center justify-between">
-                        <span className="text-white/90 text-sm">Light Pet Hair</span>
-                        <span className="text-shine-gold font-semibold">$25</span>
+                <div className="space-y-8">
+                  {/* Concrete Service */}
+                  <div className="bg-gray-800 rounded-2xl overflow-hidden">
+                    <div className="relative h-48">
+                      <Image
+                        src="/thumbnail_IMG_3054.jpg"
+                        alt="Broom Finish Concrete"
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-black/30"></div>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <h4 className="text-2xl font-bold text-white text-center">Concrete Services</h4>
                       </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-white/90 text-sm">Complete Pet Hair</span>
-                        <span className="text-shine-gold font-semibold">$50</span>
+                    </div>
+                    <div className="p-6">
+                      <p className="text-white/80 mb-4">Professional concrete installation and finishing services</p>
+                      <div className="grid grid-cols-1 gap-2">
+                        <div className="flex items-center space-x-2">
+                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                          <span className="text-sm text-white/70">Broom Finish Concrete</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                          <span className="text-sm text-white/70">Stamped Concrete Patterns</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                          <span className="text-sm text-white/70">Driveways & Walkways</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                          <span className="text-sm text-white/70">Patios & Foundation Work</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Stone & Pavers Service */}
+                  <div className="bg-gray-800 rounded-2xl overflow-hidden">
+                    <div className="relative h-48">
+                      <Image
+                        src="/IMG_3285.JPG"
+                        alt="Stone & Pavers"
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-black/30"></div>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <h4 className="text-2xl font-bold text-white text-center">Stone & Pavers</h4>
+                      </div>
+                    </div>
+                    <div className="p-6">
+                      <p className="text-white/80 mb-4">Expert stone and masonry installation</p>
+                      <div className="grid grid-cols-1 gap-2">
+                        <div className="flex items-center space-x-2">
+                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                          <span className="text-sm text-white/70">Retaining Walls</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                          <span className="text-sm text-white/70">Stone & Paver Installation</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                          <span className="text-sm text-white/70">Natural Stone Work</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                          <span className="text-sm text-white/70">Custom Stone Features</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Decks Service */}
+                  <div className="bg-gray-800 rounded-2xl overflow-hidden">
+                    <div className="relative h-48">
+                      <Image
+                        src="/2024-07-26-18-06-29-443.PNG"
+                        alt="Custom Deck Construction"
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-black/30"></div>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <h4 className="text-2xl font-bold text-white text-center">Deck Construction</h4>
+                      </div>
+                    </div>
+                    <div className="p-6">
+                      <p className="text-white/80 mb-4">Custom decks and outdoor living spaces</p>
+                      <div className="grid grid-cols-1 gap-2">
+                        <div className="flex items-center space-x-2">
+                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                          <span className="text-sm text-white/70">Custom Deck Design</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                          <span className="text-sm text-white/70">Composite & Wood Decking</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                          <span className="text-sm text-white/70">Railings & Stairs</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                          <span className="text-sm text-white/70">Outdoor Living Spaces</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Landscape & Sod Service */}
+                  <div className="bg-gray-800 rounded-2xl overflow-hidden">
+                    <div className="relative h-48">
+                      <Image
+                        src="/IMG_3287.JPG"
+                        alt="Landscape & Sod Installation"
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-black/30"></div>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <h4 className="text-2xl font-bold text-white text-center">Landscape & Sod</h4>
+                      </div>
+                    </div>
+                    <div className="p-6">
+                      <p className="text-white/80 mb-4">Complete landscaping and sod installation</p>
+                      <div className="grid grid-cols-1 gap-2">
+                        <div className="flex items-center space-x-2">
+                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                          <span className="text-sm text-white/70">Landscape Design</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                          <span className="text-sm text-white/70">Sod Installation</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                          <span className="text-sm text-white/70">Hardscaping</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                          <span className="text-sm text-white/70">Drainage Solutions</span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </section>
 
-                <div className="mt-8 text-center">
-                  <p className="text-white/60 text-sm">
-                    * All add-ons are available with any detailing package. Contact us for custom combinations.
+          {/* Mission Statement & Why Choose Us */}
+          <section className="py-20 bg-gray-900 text-white">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              {/* Mission Statement */}
+              <div className="text-center mb-20 animate-on-scroll animate-left" data-id="mission-statement">
+                <h2 className="text-4xl font-bold mb-6">Our Mission</h2>
+                <div className="max-w-4xl mx-auto">
+                  <p className="text-xl text-gray-300 leading-relaxed mb-6">
+                    At Bedrock Construction, we are dedicated to transforming outdoor spaces into exceptional living environments through superior craftsmanship, innovative design, and unwavering commitment to customer satisfaction. 
+                  </p>
+                  <p className="text-lg text-gray-300 leading-relaxed">
+                    We believe that every project, from a simple concrete driveway to a complete landscape transformation, deserves the same level of attention to detail, quality materials, and professional execution. Our mission is to build not just structures, but lasting relationships with our clients while enhancing the beauty and functionality of their properties.
+                  </p>
+                </div>
+              </div>
+
+              <div className="text-center mb-16 animate-on-scroll animate-left" data-id="why-choose-title">
+                <h2 className="text-4xl font-bold mb-4">Why Choose Bedrock Construction?</h2>
+                <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+                  We're committed to delivering exceptional results on every project, big or small.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="text-center animate-on-scroll stagger-1" data-id="feature-1">
+                  <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-6 transition-all duration-300 hover:scale-110">
+                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-bold mb-4">Quality Guaranteed</h3>
+                  <p className="text-gray-300">
+                    We use only the finest materials and proven construction techniques to ensure lasting results.
+                  </p>
+                </div>
+
+                <div className="text-center animate-on-scroll stagger-2" data-id="feature-2">
+                  <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-6 transition-all duration-300 hover:scale-110">
+                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-bold mb-4">Experienced Team</h3>
+                  <p className="text-gray-300">
+                    Our skilled professionals have years of experience in all aspects of construction and masonry.
+                  </p>
+                </div>
+
+                <div className="text-center animate-on-scroll stagger-3" data-id="feature-3">
+                  <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-6 transition-all duration-300 hover:scale-110">
+                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-bold mb-4">On-Time Delivery</h3>
+                  <p className="text-gray-300">
+                    We respect your time and budget, delivering projects on schedule and within agreed parameters.
                   </p>
                 </div>
               </div>
             </div>
           </section>
 
-          {/* Process Section */}
-          <section className="py-24 bg-black content-optimize">
-            <div className="max-w-7xl mx-auto px-8">
-              <div className="text-center mb-16">
-                <h3 className="text-shine-gold font-semibold mb-4">HOW IT WORKS</h3>
-                <h2 className="text-3xl font-bold text-white">Our Mobile Detailing Process in 3 Easy Steps</h2>
+          {/* Our Work Portfolio - Photo Collage */}
+          <section id="work" className="py-20 bg-white">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-16 animate-on-scroll animate-left" data-id="portfolio-title">
+                <h2 className="text-4xl font-bold text-gray-900 mb-4 fade-in-up stagger-1">Our Recent Work</h2>
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto fade-in-up stagger-2">
+                  Take a look at some of our completed projects showcasing quality craftsmanship and attention to detail.
+                </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div className="text-center bg-shine-dark/30 p-8 rounded-xl border border-shine-gold/20 hover:border-shine-gold/50 transition-all">
-                  <div className="bg-shine-gold/10 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 border border-shine-gold/40">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-shine-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                    </svg>
+              {/* Photo Collage Grid */}
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-12">
+                {/* Photo 1 */}
+                <div className="animate-on-scroll fade-in-up stagger-1" data-id="photo-1">
+                  <div className="relative aspect-square bg-gray-200 rounded-lg overflow-hidden group">
+                    <Image
+                      src="/IMG_3280.JPG"
+                      alt="Retaining Wall Project"
+                      fill
+                      className="object-cover transition-transform duration-75 group-hover:scale-125"
+                    />
+                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
-                  <h3 className="text-xl font-bold mb-4 text-white">1. Book Online</h3>
-                  <p className="text-white/80">Schedule your appointment through our easy-to-use online booking system. Select your service, date, and time.</p>
                 </div>
 
-                <div className="text-center bg-shine-dark/30 p-8 rounded-xl border border-shine-gold/20 hover:border-shine-gold/50 transition-all">
-                  <div className="bg-shine-gold/10 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 border border-shine-gold/40">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-shine-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                    </svg>
+                {/* Photo 2 */}
+                <div className="animate-on-scroll fade-in-up stagger-2" data-id="photo-2">
+                  <div className="relative aspect-square bg-gray-200 rounded-lg overflow-hidden group">
+                    <Image
+                      src="/IMG_3281.JPG"
+                      alt="Retaining Wall Construction"
+                      fill
+                      className="object-cover transition-transform duration-75 group-hover:scale-125"
+                    />
+                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
-                  <h3 className="text-xl font-bold mb-4 text-white">2. We Come to You</h3>
-                  <p className="text-white/80">Our fully-equipped mobile detailing team arrives at your location with everything needed for a professional detail.</p>
                 </div>
 
-                <div className="text-center bg-shine-dark/30 p-8 rounded-xl border border-shine-gold/20 hover:border-shine-gold/50 transition-all">
-                  <div className="bg-shine-gold/10 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 border border-shine-gold/40">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-shine-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905 0 .905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
-                    </svg>
+                {/* Photo 3 */}
+                <div className="animate-on-scroll fade-in-up stagger-3" data-id="photo-3">
+                  <div className="relative aspect-square bg-gray-200 rounded-lg overflow-hidden group">
+                    <Image
+                      src="/IMG_3282.JPG"
+                      alt="Stamped Concrete Project"
+                      fill
+                      className="object-cover transition-transform duration-75 group-hover:scale-125"
+                    />
+                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
-                  <h3 className="text-xl font-bold mb-4 text-white">3. Enjoy Your Shining Car</h3>
-                  <p className="text-white/80">Relax while we transform your vehicle. When we&apos;re done, you&apos;ll have a brilliantly clean car without leaving home.</p>
                 </div>
+
+                {/* Photo 4 */}
+                <div className="animate-on-scroll fade-in-up stagger-4" data-id="photo-4">
+                  <div className="relative aspect-square bg-gray-200 rounded-lg overflow-hidden group">
+                    <Image
+                      src="/IMG_3283.JPG"
+                      alt="Stamped Concrete Detail"
+                      fill
+                      className="object-cover transition-transform duration-75 group-hover:scale-125"
+                    />
+                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+                </div>
+
+                {/* Photo 5 */}
+                <div className="animate-on-scroll fade-in-up stagger-5" data-id="photo-5">
+                  <div className="relative aspect-square bg-gray-200 rounded-lg overflow-hidden group">
+                    <Image
+                      src="/thumbnail_IMG_3054.jpg"
+                      alt="Broom Finish Concrete"
+                      fill
+                      className="object-cover transition-transform duration-75 group-hover:scale-125"
+                    />
+                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+                </div>
+
+                {/* Photo 6 */}
+                <div className="animate-on-scroll fade-in-up stagger-6" data-id="photo-6">
+                  <div className="relative aspect-square bg-gray-200 rounded-lg overflow-hidden group">
+                    <Image
+                      src="/IMG_3285.JPG"
+                      alt="Stone & Pavers Installation"
+                      fill
+                      className="object-cover transition-transform duration-75 group-hover:scale-125"
+                    />
+                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+                </div>
+
+                {/* Photo 7 */}
+                <div className="animate-on-scroll fade-in-up stagger-7" data-id="photo-7">
+                  <div className="relative aspect-square bg-gray-200 rounded-lg overflow-hidden group">
+                                          <Image
+                        src="/IMG_3286.JPG"
+                        alt="Stone & Pavers Project"
+                        fill
+                        className="object-cover transition-transform duration-75 group-hover:scale-125"
+                      />
+                                         <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+                </div>
+
+                {/* Photo 8 */}
+                <div className="animate-on-scroll fade-in-up stagger-8" data-id="photo-8">
+                  <div className="relative aspect-square bg-gray-200 rounded-lg overflow-hidden group">
+                    <Image
+                      src="/IMG_3287.JPG"
+                      alt="Landscape & Sod Project"
+                      fill
+                      className="object-cover transition-transform duration-75 group-hover:scale-125"
+                    />
+                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="text-center">
+                <Link 
+                  href="#contact" 
+                  className="bg-gray-900 text-white px-8 py-4 rounded-md font-bold text-lg hover:bg-gray-800 transition-all duration-300 hover:scale-105 inline-block fade-in-up stagger-9"
+                >
+                  Start Your Project
+                </Link>
               </div>
             </div>
           </section>
 
           {/* Contact Section */}
-          <section id="contact" className="py-24 bg-black content-optimize">
-            <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-12">
-              <div>
-                <h3 className="text-shine-gold font-semibold mb-4">CONTACT US</h3>
-                <h2 className="text-3xl font-bold mb-6 text-white">Get In Touch</h2>
-                <p className="text-lg mb-8 text-white/80">
-                  Have questions about our services or want to schedule an appointment? Contact us and we&apos;ll get back to you as soon as possible.
+          <section id="contact" className="py-20 bg-white">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-16 animate-on-scroll animate-left" data-id="contact-title">
+                <h2 className="text-4xl font-bold text-gray-900 mb-4 fade-in-up stagger-1">Get In Touch</h2>
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto fade-in-up stagger-2">
+                  Ready to start your next construction project? Contact us today for a free consultation and quote.
                 </p>
+              </div>
 
-                <div className="space-y-6">
-                  <div className="flex items-center gap-4">
-                    <div className="bg-shine-gold/10 p-3 rounded-full border border-shine-gold/30">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-shine-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                {/* Contact Information */}
+                <div className="space-y-8 animate-on-scroll animate-left" data-id="contact-info">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center flex-shrink-0">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                       </svg>
                     </div>
                     <div>
-                      <h4 className="font-semibold text-white">Phone</h4>
-                      <p className="text-white/80">(506) 470-6164</p>
+                      <h3 className="text-xl font-bold text-gray-900 mb-2">Phone</h3>
+                      <p className="text-lg text-gray-700">{config.contact.phone1}</p>
+                      <p className="text-lg text-gray-700">{config.contact.phone2}</p>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-4">
-                    <div className="bg-shine-gold/10 p-3 rounded-full border border-shine-gold/30">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-shine-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center flex-shrink-0">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                       </svg>
                     </div>
                     <div>
-                      <h4 className="font-semibold text-white">Email</h4>
-                      <p className="text-white/80">shinemobiledetailings@gmail.com</p>
+                      <h3 className="text-xl font-bold text-gray-900 mb-2">Email</h3>
+                      <p className="text-lg text-gray-700">{config.contact.email}</p>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-4">
-                    <div className="bg-shine-gold/10 p-3 rounded-full border border-shine-gold/30">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-shine-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center flex-shrink-0">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                       </svg>
                     </div>
                     <div>
-                      <h4 className="font-semibold text-white">Hours</h4>
-                      <p className="text-white/80">Monday-Saturday: 8am-6pm</p>
-                      <p className="text-white/80">Sunday: 9am-4pm</p>
+                      <h3 className="text-xl font-bold text-gray-900 mb-2">Service Area</h3>
+                      <p className="text-lg text-gray-700">New Brunswick and surrounding areas</p>
+                    </div>
+                  </div>
+
+                  <div className="bg-gray-50 p-6 rounded-lg">
+                    <h3 className="text-xl font-bold text-gray-900 mb-4">Contact Us</h3>
+                    <p className="text-gray-700 mb-4">
+                      Ready to discuss your construction project? Click the button below to get in touch.
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-4">
+                      <a 
+                        href={`tel:${config.contact.phone1}`}
+                        className="bg-gray-900 text-white px-6 py-3 rounded-md font-medium hover:bg-gray-800 transition-all duration-300 hover:scale-105 text-center"
+                      >
+                        Call Now
+                      </a>
+                      <a 
+                        href={`mailto:${config.contact.email}`}
+                        className="border-2 border-gray-900 text-gray-900 px-6 py-3 rounded-md font-medium hover:bg-gray-900 hover:text-white transition-all duration-300 hover:scale-105 text-center"
+                      >
+                        Send Email
+                      </a>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="bg-shine-dark p-8 rounded-xl border border-shine-gold/20">
-                <h3 className="text-xl font-bold mb-6 text-white">Send Us a Message</h3>
-                <form action="https://formspree.io/f/manonznr" method="POST" className="space-y-4">
-                  <input type="hidden" name="_next" value="https://shinemobiledetailings.ca/thank-you" />
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-1 text-white/80">First Name</label>
-                      <input type="text" name="firstName" className="input bg-black border-shine-gold/30 text-white w-full focus:border-shine-gold" required />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-1 text-white/80">Last Name</label>
-                      <input type="text" name="lastName" className="input bg-black border-shine-gold/30 text-white w-full focus:border-shine-gold" required />
-                    </div>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-1 text-white/80">Email</label>
-                    <input type="email" name="email" className="input bg-black border-shine-gold/30 text-white w-full focus:border-shine-gold" required />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-1 text-white/80">Phone</label>
-                    <input type="tel" name="phone" className="input bg-black border-shine-gold/30 text-white w-full focus:border-shine-gold" required />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-1 text-white/80">Message</label>
-                    <textarea name="message" rows="4" className="textarea bg-black border-shine-gold/30 text-white w-full focus:border-shine-gold" required></textarea>
-                  </div>
-                  <button type="submit" className="btn bg-shine-gold border-shine-gold text-shine-dark hover:bg-transparent hover:text-shine-gold w-full">
-                    Send Message
-                  </button>
-                </form>
+                {/* Contact Form */}
+                <div className="animate-on-scroll" data-id="contact-form">
+                  <ContactForm />
+                </div>
               </div>
             </div>
           </section>
         </main>
 
-        <footer className="bg-black text-white py-12 border-t border-shine-gold/20">
-          <div className="max-w-7xl mx-auto px-8">
+        {/* Footer */}
+        <footer className="bg-gray-900 text-white py-12">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div className="md:col-span-2">
-                <div className="flex items-center gap-2 mb-4">
-                  <Image src="/icon.png" width={50} height={50} alt="Shine Mobile Detailing Logo" />
-                  <span className="font-bold text-xl text-white">Shine Mobile Detailing</span>
+                <div className="flex items-center space-x-3 mb-4">
+                  <Image 
+                    src="/337381986_1149718553095476_491873017312997509_n.jpg" 
+                    alt="Bedrock Construction Logo" 
+                    width={50} 
+                    height={50} 
+                    className="h-10 w-auto"
+                  />
+                  <div>
+                    <h3 className="text-xl font-bold">{config.appName}</h3>
+                    <p className="text-gray-400 text-sm">Quality Construction Services</p>
+                  </div>
                 </div>
-                <p className="mb-6 text-white/70 max-w-md">
-                  Professional mobile detailing service that comes to your location. Premium auto detailing at your doorstep.
+                <p className="text-gray-300 mb-6 max-w-md">
+                  Professional construction and landscape services including concrete, stone & pavers, decks, and landscape & sod. 
+                  Quality craftsmanship you can trust.
                 </p>
-                <div className="flex gap-4">
-                  <a href="https://www.facebook.com/profile.php?id=61556797486720" className="btn btn-circle bg-transparent border-shine-gold/50 text-shine-gold hover:border-shine-gold" target="_blank" rel="noopener noreferrer">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
-                    </svg>
-                  </a>
-                  <a href="https://www.instagram.com/shinemobiledetailings/" className="btn btn-circle bg-transparent border-shine-gold/50 text-shine-gold hover:border-shine-gold" target="_blank" rel="noopener noreferrer">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                    </svg>
-                  </a>
-                </div>
+
               </div>
 
               <div>
-                <h4 className="font-bold text-lg mb-4 text-white">Quick Links</h4>
-                <ul className="space-y-2">
-                  <li><Link href="#" className="text-white/70 hover:text-shine-gold">Home</Link></li>
-                  <li><Link href="#about" className="text-white/70 hover:text-shine-gold">About</Link></li>
-                  <li><Link href="#services" className="text-white/70 hover:text-shine-gold">Services</Link></li>
-                  <li><Link href="#faq" className="text-white/70 hover:text-shine-gold">FAQ</Link></li>
-                  <li><Link href="#contact" className="text-white/70 hover:text-shine-gold">Contact</Link></li>
+                <h4 className="text-lg font-bold mb-4">Services</h4>
+                <ul className="space-y-2 text-gray-300">
+                  <li><Link href="#services" className="hover:text-white transition-colors">Concrete</Link></li>
+                  <li><Link href="#services" className="hover:text-white transition-colors">Stone & Pavers</Link></li>
+                  <li><Link href="#services" className="hover:text-white transition-colors">Decks</Link></li>
+                  <li><Link href="#services" className="hover:text-white transition-colors">Landscape & Sod</Link></li>
                 </ul>
               </div>
 
-              
+              <div>
+                <h4 className="text-lg font-bold mb-4">Contact</h4>
+                <ul className="space-y-2 text-gray-300">
+                  <li>{config.contact.phone1}</li>
+                  <li>{config.contact.phone2}</li>
+                  <li>{config.contact.email}</li>
+                  <li>New Brunswick, Canada</li>
+                </ul>
+              </div>
             </div>
 
-            <div className="mt-12 pt-8 border-t border-shine-gold/10 flex flex-col md:flex-row justify-between items-center">
-              <p className="text-white/60">© 2023 Shine Mobile Detailing. All rights reserved.</p>
-              <div className="flex gap-4 mt-4 md:mt-0">
-                <Link href="#" className="text-white/60 hover:text-shine-gold">Terms</Link>
-                <Link href="#" className="text-white/60 hover:text-shine-gold">Privacy</Link>
-              </div>
+            <div className="mt-12 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
+              <p className="text-gray-400">© 2024 {config.appName}. All rights reserved.</p>
+
             </div>
           </div>
         </footer>

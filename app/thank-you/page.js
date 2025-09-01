@@ -8,8 +8,8 @@ export default function ThankYou() {
     <div className="min-h-screen bg-shine-dark text-white">
       <header className="p-4 flex justify-between items-center max-w-7xl mx-auto">
         <div className="flex items-center gap-2">
-          <Image src="/icon.png" width={50} height={50} alt="Shine Mobile Detailing Logo" />
-          <span className="font-bold text-xl text-white">Shine Mobile Detailing</span>
+          <Image src="/337381986_1149718553095476_491873017312997509_n.jpg" width={50} height={50} alt="Bedrock Construction Logo" />
+          <span className="font-bold text-xl text-white">Bedrock Construction</span>
         </div>
         <Link href="/" className="btn border-shine-gold bg-transparent text-shine-gold hover:bg-shine-gold hover:text-shine-dark">
           Back to Home
@@ -27,14 +27,14 @@ export default function ThankYou() {
             <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">Thank You!</h1>
             <p className="text-xl text-white/80 mb-8">
               We&apos;ve received your message and will be in touch with you shortly. 
-              We appreciate your interest in our mobile detailing services.
+              We appreciate your interest in our construction services.
             </p>
             <div className="flex justify-center gap-4 flex-wrap">
               <Link href="/" className="btn bg-shine-gold border-shine-gold text-shine-dark hover:bg-transparent hover:text-shine-gold">
                 Return to Home
               </Link>
               <Link href="/#services" className="btn btn-outline border-white text-white hover:border-shine-gold hover:text-shine-gold">
-                View Services
+                View Construction Services
               </Link>
             </div>
           </div>

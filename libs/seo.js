@@ -81,7 +81,7 @@ export const renderSchemaTags = () => {
           "@type": "SoftwareApplication",
           name: config.appName,
           description: config.appDescription,
-          image: `https://${config.domainName}/icon.png`,
+          image: `https://${config.domainName}/337381986_1149718553095476_491873017312997509_n.jpg`,
           url: `https://${config.domainName}/`,
           author: {
             "@type": "Person",
