@@ -16,7 +16,7 @@ function ContactForm() {
         </div>
         <h3 className="text-xl font-bold text-green-900 mb-2">Thank You!</h3>
         <p className="text-green-700">
-          Your message has been sent successfully. We'll get back to you within 24 hours.
+          Your message has been sent successfully. We&apos;ll get back to you as soon as possible.
         </p>
       </div>
     );

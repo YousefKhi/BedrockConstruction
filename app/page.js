@@ -662,7 +662,7 @@ export default function Page() {
               <div className="text-center mb-16 animate-on-scroll animate-left" data-id="why-choose-title">
                 <h2 className="text-4xl font-bold mb-4">Why Choose Bedrock Construction?</h2>
                 <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-                  We're committed to delivering exceptional results on every project, big or small.
+                  We&apos;re committed to delivering exceptional results on every project, big or small.
                 </p>
               </div>
 
