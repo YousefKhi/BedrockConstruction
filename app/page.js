@@ -522,7 +522,11 @@ export default function Page() {
                         </div>
                         <div className="flex items-center space-x-2">
                           <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                          <span className="text-sm text-white/70">Patios & Foundation Work</span>
+                          <span className="text-sm text-white/70">Patios & Slabs</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                          <span className="text-sm text-white/70">Commercial Concrete</span>
                         </div>
                       </div>
                     </div>
@@ -547,11 +551,11 @@ export default function Page() {
                       <div className="grid grid-cols-1 gap-2">
                         <div className="flex items-center space-x-2">
                           <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                          <span className="text-sm text-white/70">Retaining Walls</span>
+                          <span className="text-sm text-white/70">Patio & Walkway Pavers</span>
                         </div>
                         <div className="flex items-center space-x-2">
                           <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                          <span className="text-sm text-white/70">Stone & Paver Installation</span>
+                          <span className="text-sm text-white/70">Retaining Walls</span>
                         </div>
                         <div className="flex items-center space-x-2">
                           <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
@@ -596,6 +600,18 @@ export default function Page() {
                         </div>
                         <div className="flex items-center space-x-2">
                           <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                          <span className="text-sm text-white/70">Gazebos & Pergolas</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                          <span className="text-sm text-white/70">Deck Repairs & Maintenance</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                          <span className="text-sm text-white/70">Multi-Level Decks</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
                           <span className="text-sm text-white/70">Outdoor Living Spaces</span>
                         </div>
                       </div>
@@ -629,11 +645,19 @@ export default function Page() {
                         </div>
                         <div className="flex items-center space-x-2">
                           <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                          <span className="text-sm text-white/70">Hardscaping</span>
+                          <span className="text-sm text-white/70">Mulch Installation</span>
                         </div>
                         <div className="flex items-center space-x-2">
                           <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
                           <span className="text-sm text-white/70">Drainage Solutions</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                          <span className="text-sm text-white/70">Outdoor Living Spaces</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                          <span className="text-sm text-white/70">Garden Design</span>
                         </div>
                       </div>
                     </div>
