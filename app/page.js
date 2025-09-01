@@ -74,7 +74,7 @@ export default function Page() {
 
   return (
     <>
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-white overflow-x-hidden">
         {/* Dynamic Header with Framer Motion Logo Transition */}
         <motion.header 
           className="fixed top-0 left-0 right-0 z-50"
@@ -86,7 +86,7 @@ export default function Page() {
           }}
           transition={{ duration: 0.3, ease: "easeOut" }}
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <motion.div 
               className="flex justify-between items-center"
               animate={{ 
@@ -214,11 +214,11 @@ export default function Page() {
             </div>
 
             <div className="relative z-10 h-full flex items-center">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="max-w-6xl">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div className="max-w-6xl w-full">
                   {/* Company Name Above Main Heading */}
                   <div className="text-right mb-8 hero-text-slide">
-                    <p className="text-gray-300 text-xl md:text-2xl font-bold tracking-widest">BEDROCK CONSTRUCTION</p>
+                    <p className="text-gray-300 text-xl md:text-2xl font-bold tracking-widest hidden sm:block">BEDROCK CONSTRUCTION</p>
                   </div>
                   
                   <div className="text-right mb-6">
@@ -260,7 +260,7 @@ export default function Page() {
 
           {/* Services Banner Section with TOP TIER Style Layout */}
           <section className="relative py-32 bg-gray-900 overflow-hidden">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
               {/* Desktop Layout */}
               <div className="hidden lg:grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 {/* Left Side - Services Overview Text */}
@@ -479,8 +479,8 @@ export default function Page() {
               </div>
 
               {/* Mobile Layout */}
-              <div className="lg:hidden">
-                <div className="text-center mb-12">
+              <div className="lg:hidden w-full">
+                <div className="text-center mb-12 w-full">
                   <h2 className="text-yellow-400 text-2xl font-bold mb-6 tracking-widest">SERVICES</h2>
                   <h3 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
                     FROM CONCRETE TO COMPLETE LANDSCAPE & SOD SOLUTIONS
@@ -490,7 +490,7 @@ export default function Page() {
                   </p>
                 </div>
 
-                <div className="space-y-8">
+                <div className="space-y-8 w-full">
                   {/* Concrete Service */}
                   <div className="bg-gray-800 rounded-2xl overflow-hidden">
                     <div className="relative h-48">
@@ -645,7 +645,7 @@ export default function Page() {
 
           {/* Mission Statement & Why Choose Us */}
           <section className="py-20 bg-gray-900 text-white">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
               {/* Mission Statement */}
               <div className="text-center mb-20 animate-on-scroll animate-left" data-id="mission-statement">
                 <h2 className="text-4xl font-bold mb-6">Our Mission</h2>
@@ -708,7 +708,7 @@ export default function Page() {
 
           {/* Our Work Portfolio - Photo Collage */}
           <section id="work" className="py-20 bg-white">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
               <div className="text-center mb-16 animate-on-scroll animate-left" data-id="portfolio-title">
                 <h2 className="text-4xl font-bold text-gray-900 mb-4 fade-in-up stagger-1">Our Recent Work</h2>
                 <p className="text-lg text-gray-600 max-w-2xl mx-auto fade-in-up stagger-2">
@@ -836,7 +836,7 @@ export default function Page() {
 
           {/* Contact Section */}
           <section id="contact" className="py-20 bg-white">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
               <div className="text-center mb-16 animate-on-scroll animate-left" data-id="contact-title">
                 <h2 className="text-4xl font-bold text-gray-900 mb-4 fade-in-up stagger-1">Get In Touch</h2>
                 <p className="text-lg text-gray-600 max-w-2xl mx-auto fade-in-up stagger-2">
@@ -918,7 +918,7 @@ export default function Page() {
 
         {/* Footer */}
         <footer className="bg-gray-900 text-white py-12">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div className="md:col-span-2">
                 <div className="flex items-center space-x-3 mb-4">
