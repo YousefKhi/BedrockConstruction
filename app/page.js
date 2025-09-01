@@ -10,6 +10,7 @@ import ContactForm from "@/components/ContactForm";
 export default function Page() {
   const [scrolled, setScrolled] = useState(false);
   const [hoveredService, setHoveredService] = useState(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const serviceDetails = {
     concrete: {
@@ -185,11 +186,14 @@ export default function Page() {
 
               {/* Mobile Menu Button */}
               <div className="md:hidden">
-                <button className={`transition-colors ${
-                  scrolled 
-                    ? 'text-gray-700 hover:text-gray-900' 
-                    : 'text-white hover:text-gray-200'
-                }`}>
+                <button 
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  className={`transition-colors ${
+                    scrolled 
+                      ? 'text-gray-700 hover:text-gray-900' 
+                      : 'text-white hover:text-gray-200'
+                  }`}
+                >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                   </svg>
@@ -198,6 +202,104 @@ export default function Page() {
             </motion.div>
           </div>
         </motion.header>
+
+        {/* Mobile Menu Overlay */}
+        {mobileMenuOpen && (
+          <div className="fixed inset-0 z-50 md:hidden">
+            {/* Backdrop */}
+            <div 
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+              onClick={() => setMobileMenuOpen(false)}
+            ></div>
+            
+            {/* Menu Panel */}
+            <div className="fixed top-0 right-0 h-full w-80 bg-white shadow-2xl transform transition-transform duration-300 ease-in-out">
+              <div className="flex flex-col h-full">
+                {/* Header */}
+                <div className="flex items-center justify-between p-6 border-b border-gray-200">
+                  <div className="flex items-center space-x-3">
+                    <Image 
+                      src="/337381986_1149718553095476_491873017312997509_n.jpg" 
+                      alt="Bedrock Construction Logo" 
+                      width={40} 
+                      height={40} 
+                      className="h-8 w-auto"
+                    />
+                    <span className="text-lg font-bold text-gray-900">Bedrock Construction</span>
+                  </div>
+                  <button 
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="text-gray-500 hover:text-gray-700"
+                  >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+                
+                {/* Navigation Links */}
+                <nav className="flex-1 px-6 py-8">
+                  <div className="space-y-6">
+                    <Link 
+                      href="#home" 
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block text-lg font-medium text-gray-900 hover:text-gray-600 transition-colors"
+                    >
+                      HOME
+                    </Link>
+                    <Link 
+                      href="#about" 
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block text-lg font-medium text-gray-900 hover:text-gray-600 transition-colors"
+                    >
+                      ABOUT US
+                    </Link>
+                    <Link 
+                      href="#services" 
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block text-lg font-medium text-gray-900 hover:text-gray-600 transition-colors"
+                    >
+                      OUR SERVICES
+                    </Link>
+                    <Link 
+                      href="#work" 
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block text-lg font-medium text-gray-900 hover:text-gray-600 transition-colors"
+                    >
+                      OUR WORK
+                    </Link>
+                    <Link 
+                      href="#contact" 
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block text-lg font-medium text-gray-900 hover:text-gray-600 transition-colors"
+                    >
+                      CONTACT US
+                    </Link>
+                  </div>
+                </nav>
+                
+                {/* Contact Info */}
+                <div className="p-6 border-t border-gray-200 bg-gray-50">
+                  <div className="space-y-4">
+                    <div>
+                      <p className="text-sm font-medium text-gray-900">Phone</p>
+                      <p className="text-sm text-gray-600">{config.contact.phone1}</p>
+                      <p className="text-sm text-gray-600">{config.contact.phone2}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-gray-900">Email</p>
+                      <p className="text-sm text-gray-600">{config.contact.email}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-gray-900">Service Area</p>
+                      <p className="text-sm text-gray-600">New Brunswick and surrounding areas</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         <main>
           {/* Hero Section */}
