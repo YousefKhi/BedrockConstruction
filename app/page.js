@@ -127,11 +127,6 @@ export default function Page() {
                     ? 'text-gray-700 hover:text-gray-900' 
                     : 'text-white hover:text-gray-200'
                 }`}>HOME</Link>
-                <Link href="#about" className={`font-medium transition-colors duration-300 ${
-                  scrolled 
-                    ? 'text-gray-700 hover:text-gray-900' 
-                    : 'text-white hover:text-gray-200'
-                }`}>ABOUT US</Link>
                 <Link href="#services" className={`font-medium transition-colors duration-300 ${
                   scrolled 
                     ? 'text-gray-700 hover:text-gray-900' 
@@ -246,13 +241,6 @@ export default function Page() {
                       className="block text-lg font-medium text-gray-900 hover:text-gray-600 transition-colors"
                     >
                       HOME
-                    </Link>
-                    <Link 
-                      href="#about" 
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block text-lg font-medium text-gray-900 hover:text-gray-600 transition-colors"
-                    >
-                      ABOUT US
                     </Link>
                     <Link 
                       href="#services" 
