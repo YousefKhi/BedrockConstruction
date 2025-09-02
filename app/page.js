@@ -1052,7 +1052,7 @@ export default function Page() {
 
                   <div className="bg-gray-50 p-6 rounded-lg" style={{ backgroundColor: '#9e9e9e' }}>
                     <h3 className="text-xl font-bold text-gray-900 mb-4">Contact Us</h3>
-                    <p className="text-gray-700 mb-4">
+                    <p className="text-gray-800 mb-4">
                       Ready to discuss your construction project? Click the button below to get in touch.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4">
