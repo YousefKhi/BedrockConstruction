@@ -175,7 +175,7 @@ function ContactForm() {
         <button 
           type="submit" 
           disabled={state.submitting}
-          className="w-full bg-gray-900 text-white px-6 py-3 rounded-md font-medium hover:bg-gray-800 transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+          className="w-full bg-black text-white px-6 py-3 rounded-md font-medium hover:bg-gray-800 transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
         >
           {state.submitting ? 'Sending...' : 'Request Quote'}
         </button>

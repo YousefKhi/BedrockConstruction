@@ -48,7 +48,7 @@ export default function Page() {
       ]
     },
     landscape: {
-      title: "LANDSCAPE & SOD",
+      title: "LANDSCAPE",
       description: "COMPLETE LANDSCAPING & SOD INSTALLATION",
       features: [
         "Landscape Design",
@@ -80,9 +80,9 @@ export default function Page() {
         <motion.header 
           className="fixed top-0 left-0 right-0 z-50"
           animate={{
-            backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.95)' : 'rgba(255, 255, 255, 0)',
+            backgroundColor: scrolled ? '#ffffff' : 'rgba(255, 255, 255, 0)',
             backdropFilter: scrolled ? 'blur(12px)' : 'blur(0px)',
-            borderBottom: scrolled ? '1px solid rgba(229, 231, 235, 1)' : '1px solid rgba(229, 231, 235, 0)',
+            borderBottom: scrolled ? '1px solid rgba(0, 0, 0, 0.1)' : '1px solid rgba(0, 0, 0, 0)',
             boxShadow: scrolled ? '0 20px 25px -5px rgba(0, 0, 0, 0.1)' : '0 0px 0px 0px rgba(0, 0, 0, 0)'
           }}
           transition={{ duration: 0.3, ease: "easeOut" }}
@@ -131,17 +131,41 @@ export default function Page() {
                   scrolled 
                     ? 'text-gray-700 hover:text-gray-900' 
                     : 'text-white hover:text-gray-200'
-                }`}>OUR SERVICES</Link>
+                }`} onClick={(e) => {
+                  e.preventDefault();
+                  const element = document.getElementById('services');
+                  if (element) {
+                    const headerHeight = 100; // Approximate header height
+                    const elementPosition = element.offsetTop - headerHeight + 50; // 50px lower
+                    window.scrollTo({ top: elementPosition, behavior: 'smooth' });
+                  }
+                }}>OUR SERVICES</Link>
                 <Link href="#work" className={`font-medium transition-colors duration-300 ${
                   scrolled 
                     ? 'text-gray-700 hover:text-gray-900' 
                     : 'text-white hover:text-gray-200'
-                }`}>OUR WORK</Link>
+                }`} onClick={(e) => {
+                  e.preventDefault();
+                  const element = document.getElementById('work');
+                  if (element) {
+                    const headerHeight = 100; // Approximate header height
+                    const elementPosition = element.offsetTop - headerHeight + 25; // 25px lower
+                    window.scrollTo({ top: elementPosition, behavior: 'smooth' });
+                  }
+                }}>OUR WORK</Link>
                 <Link href="#contact" className={`font-medium transition-colors duration-300 ${
                   scrolled 
                     ? 'text-gray-700 hover:text-gray-900' 
                     : 'text-white hover:text-gray-200'
-                }`}>CONTACT US</Link>
+                }`} onClick={(e) => {
+                  e.preventDefault();
+                  const element = document.getElementById('contact');
+                  if (element) {
+                    const headerHeight = 100; // Approximate header height
+                    const elementPosition = element.offsetTop - headerHeight - 25; // 25px higher
+                    window.scrollTo({ top: elementPosition, behavior: 'smooth' });
+                  }
+                }}>CONTACT US</Link>
               </nav>
 
               {/* Contact Info */}
@@ -244,21 +268,48 @@ export default function Page() {
                     </Link>
                     <Link 
                       href="#services" 
-                      onClick={() => setMobileMenuOpen(false)}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setMobileMenuOpen(false);
+                        const element = document.getElementById('services');
+                        if (element) {
+                          const headerHeight = 100; // Approximate header height
+                          const elementPosition = element.offsetTop - headerHeight + 50; // 50px lower
+                          window.scrollTo({ top: elementPosition, behavior: 'smooth' });
+                        }
+                      }}
                       className="block text-lg font-medium text-gray-900 hover:text-gray-600 transition-colors"
                     >
                       OUR SERVICES
                     </Link>
                     <Link 
                       href="#work" 
-                      onClick={() => setMobileMenuOpen(false)}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setMobileMenuOpen(false);
+                        const element = document.getElementById('work');
+                        if (element) {
+                          const headerHeight = 100; // Approximate header height
+                          const elementPosition = element.offsetTop - headerHeight + 25; // 25px lower
+                          window.scrollTo({ top: elementPosition, behavior: 'smooth' });
+                        }
+                      }}
                       className="block text-lg font-medium text-gray-900 hover:text-gray-600 transition-colors"
                     >
                       OUR WORK
                     </Link>
                     <Link 
                       href="#contact" 
-                      onClick={() => setMobileMenuOpen(false)}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setMobileMenuOpen(false);
+                        const element = document.getElementById('contact');
+                        if (element) {
+                          const headerHeight = 100; // Approximate header height
+                          const elementPosition = element.offsetTop - headerHeight - 25; // 25px higher
+                          window.scrollTo({ top: elementPosition, behavior: 'smooth' });
+                        }
+                      }}
                       className="block text-lg font-medium text-gray-900 hover:text-gray-600 transition-colors"
                     >
                       CONTACT US
@@ -267,7 +318,7 @@ export default function Page() {
                 </nav>
                 
                 {/* Contact Info */}
-                <div className="p-6 border-t border-gray-200 bg-gray-50">
+                <div className="p-6 border-t border-gray-200" style={{ backgroundColor: '#9e9e9e' }}>
                   <div className="space-y-4">
                     <div>
                       <p className="text-sm font-medium text-gray-900">Phone</p>
@@ -330,7 +381,7 @@ export default function Page() {
                   <div className="flex flex-col sm:flex-row gap-4 hero-subtitle-slide justify-end">
                     <Link 
                       href="#contact" 
-                      className="bg-white text-black px-8 py-4 rounded-md font-bold text-lg hover:bg-gray-200 transition-all duration-300 hover:scale-105 inline-block text-center"
+                      className="bg-black text-white px-8 py-4 rounded-md font-bold text-lg hover:bg-gray-800 transition-all duration-300 hover:scale-105 inline-block text-center"
                     >
                       Get Free Quote
                     </Link>
@@ -349,7 +400,7 @@ export default function Page() {
 
 
           {/* Services Banner Section with TOP TIER Style Layout */}
-          <section className="relative py-32 bg-gray-900 overflow-hidden">
+          <section id="services" className="relative py-32 bg-white overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
               {/* Desktop Layout */}
               <div className="hidden lg:grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -363,7 +414,7 @@ export default function Page() {
                 >
                   {/* Dynamic Text Content */}
                   <motion.h2 
-                    className="text-yellow-400 text-2xl font-bold mb-8 tracking-widest"
+                    className="text-black text-2xl font-bold mb-8 tracking-widest"
                     initial={{ opacity: 0, x: -50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
@@ -374,7 +425,7 @@ export default function Page() {
                   
                   <motion.h3 
                     key={hoveredService || "default"}
-                    className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 leading-tight"
+                    className="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-8 leading-tight"
                     initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.6 }}
@@ -385,7 +436,7 @@ export default function Page() {
                         <br />
                         TO COMPLETE
                         <br />
-                        LANDSCAPE & SOD
+                        LANDSCAPE
                         <br />
                         SOLUTIONS
                       </>
@@ -394,7 +445,7 @@ export default function Page() {
                   
                   <motion.p 
                     key={hoveredService ? `${hoveredService}-desc` : "default-desc"}
-                    className="text-2xl md:text-3xl font-bold text-white/90 leading-tight mb-8"
+                    className="text-2xl md:text-3xl font-bold text-gray-600 leading-tight mb-8"
                     initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.6 }}
@@ -421,7 +472,7 @@ export default function Page() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.2 }}
                     >
-                      <h4 className="text-lg font-semibold text-yellow-400 mb-4">Our Services Include:</h4>
+                      <h4 className="text-lg font-semibold text-black mb-4">Our Services Include:</h4>
                       <div className="grid grid-cols-1 gap-3">
                         {serviceDetails[hoveredService].features.map((feature, index) => (
                           <motion.div
@@ -431,8 +482,8 @@ export default function Page() {
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
                           >
-                            <div className="w-2 h-2 bg-yellow-400 rounded-full flex-shrink-0"></div>
-                            <span className="text-lg text-white/80">{feature}</span>
+                            <div className="w-2 h-2 bg-black rounded-full flex-shrink-0"></div>
+                            <span className="text-lg text-gray-700">{feature}</span>
                           </motion.div>
                         ))}
                       </div>
@@ -561,7 +612,7 @@ export default function Page() {
                       />
                       <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300"></div>
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <h4 className="text-2xl font-bold text-white text-center">Landscape & Sod</h4>
+                        <h4 className="text-2xl font-bold text-white text-center">Landscape</h4>
                       </div>
                     </div>
                   </motion.div>
@@ -571,18 +622,18 @@ export default function Page() {
               {/* Mobile Layout */}
               <div className="lg:hidden w-full">
                 <div className="text-center mb-12 w-full">
-                  <h2 className="text-yellow-400 text-2xl font-bold mb-6 tracking-widest">SERVICES</h2>
-                  <h3 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
-                    FROM CONCRETE TO COMPLETE LANDSCAPE & SOD SOLUTIONS
+                  <h2 className="text-black text-2xl font-bold mb-6 tracking-widest">SERVICES</h2>
+                  <h3 className="text-3xl md:text-4xl font-bold text-black mb-6 leading-tight">
+                    FROM CONCRETE TO COMPLETE LANDSCAPE SOLUTIONS
                   </h3>
-                  <p className="text-lg md:text-xl text-white/90 leading-relaxed">
+                  <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
                     BROOM FINISH & STAMPED CONCRETE TO COMPLETE LANDSCAPING
                   </p>
                 </div>
 
                 <div className="space-y-8 w-full">
                   {/* Concrete Service */}
-                  <div className="bg-gray-800 rounded-2xl overflow-hidden">
+                  <div className="rounded-2xl overflow-hidden" style={{ backgroundColor: '#9e9e9e' }}>
                     <div className="relative h-48">
                       <Image
                         src="/thumbnail_IMG_3054.jpg"
@@ -596,34 +647,34 @@ export default function Page() {
                       </div>
                     </div>
                     <div className="p-6">
-                      <p className="text-white/80 mb-4">Professional concrete installation and finishing services</p>
+                      <p className="text-gray-300 mb-4">Professional concrete installation and finishing services</p>
                       <div className="grid grid-cols-1 gap-2">
                         <div className="flex items-center space-x-2">
-                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                          <span className="text-sm text-white/70">Broom Finish Concrete</span>
+                          <div className="w-2 h-2 bg-black rounded-full"></div>
+                                                      <span className="text-sm text-gray-200">Broom Finish Concrete</span>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                          <span className="text-sm text-white/70">Stamped Concrete Patterns</span>
+                          <div className="w-2 h-2 bg-black rounded-full"></div>
+                                                      <span className="text-sm text-gray-200">Stamped Concrete Patterns</span>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                          <span className="text-sm text-white/70">Driveways & Walkways</span>
+                          <div className="w-2 h-2 bg-black rounded-full"></div>
+                                                      <span className="text-sm text-gray-200">Driveways & Walkways</span>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                          <span className="text-sm text-white/70">Patios & Slabs</span>
+                          <div className="w-2 h-2 bg-black rounded-full"></div>
+                                                      <span className="text-sm text-gray-200">Patios & Slabs</span>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                          <span className="text-sm text-white/70">Commercial Concrete</span>
+                          <div className="w-2 h-2 bg-black rounded-full"></div>
+                                                      <span className="text-sm text-gray-200">Commercial Concrete</span>
                         </div>
                       </div>
                     </div>
                   </div>
 
                   {/* Stone & Pavers Service */}
-                  <div className="bg-gray-800 rounded-2xl overflow-hidden">
+                  <div className="rounded-2xl overflow-hidden" style={{ backgroundColor: '#9e9e9e' }}>
                     <div className="relative h-48">
                       <Image
                         src="/IMG_3285.JPG"
@@ -637,30 +688,30 @@ export default function Page() {
                       </div>
                     </div>
                     <div className="p-6">
-                      <p className="text-white/80 mb-4">Expert stone and masonry installation</p>
+                      <p className="text-gray-300 mb-4">Expert stone and masonry installation</p>
                       <div className="grid grid-cols-1 gap-2">
                         <div className="flex items-center space-x-2">
-                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                          <span className="text-sm text-white/70">Patio & Walkway Pavers</span>
+                          <div className="w-2 h-2 bg-black rounded-full"></div>
+                                                      <span className="text-sm text-gray-200">Patio & Walkway Pavers</span>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                          <span className="text-sm text-white/70">Retaining Walls</span>
+                          <div className="w-2 h-2 bg-black rounded-full"></div>
+                                                      <span className="text-sm text-gray-200">Retaining Walls</span>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                          <span className="text-sm text-white/70">Natural Stone Work</span>
+                          <div className="w-2 h-2 bg-black rounded-full"></div>
+                                                      <span className="text-sm text-gray-200">Natural Stone Work</span>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                          <span className="text-sm text-white/70">Custom Stone Features</span>
+                          <div className="w-2 h-2 bg-black rounded-full"></div>
+                                                      <span className="text-sm text-gray-200">Custom Stone Features</span>
                         </div>
                       </div>
                     </div>
                   </div>
 
                   {/* Decks Service */}
-                  <div className="bg-gray-800 rounded-2xl overflow-hidden">
+                  <div className="rounded-2xl overflow-hidden" style={{ backgroundColor: '#9e9e9e' }}>
                     <div className="relative h-48">
                       <Image
                         src="/2024-07-26-18-06-29-443.PNG"
@@ -674,42 +725,42 @@ export default function Page() {
                       </div>
                     </div>
                     <div className="p-6">
-                      <p className="text-white/80 mb-4">Custom decks and outdoor living spaces</p>
+                      <p className="text-gray-300 mb-4">Custom decks and outdoor living spaces</p>
                       <div className="grid grid-cols-1 gap-2">
                         <div className="flex items-center space-x-2">
-                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                          <span className="text-sm text-white/70">Custom Deck Design</span>
+                          <div className="w-2 h-2 bg-black rounded-full"></div>
+                                                      <span className="text-sm text-gray-200">Custom Deck Design</span>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                          <span className="text-sm text-white/70">Composite & Wood Decking</span>
+                          <div className="w-2 h-2 bg-black rounded-full"></div>
+                                                      <span className="text-sm text-gray-200">Composite & Wood Decking</span>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                          <span className="text-sm text-white/70">Railings & Stairs</span>
+                          <div className="w-2 h-2 bg-black rounded-full"></div>
+                                                      <span className="text-sm text-gray-200">Railings & Stairs</span>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                          <span className="text-sm text-white/70">Gazebos & Pergolas</span>
+                          <div className="w-2 h-2 bg-black rounded-full"></div>
+                          <span className="text-sm text-gray-600">Gazebos & Pergolas</span>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                          <span className="text-sm text-white/70">Deck Repairs & Maintenance</span>
+                          <div className="w-2 h-2 bg-black rounded-full"></div>
+                          <span className="text-sm text-gray-600">Deck Repairs & Maintenance</span>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                          <span className="text-sm text-white/70">Multi-Level Decks</span>
+                          <div className="w-2 h-2 bg-black rounded-full"></div>
+                          <span className="text-sm text-gray-600">Multi-Level Decks</span>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                          <span className="text-sm text-white/70">Outdoor Living Spaces</span>
+                          <div className="w-2 h-2 bg-black rounded-full"></div>
+                          <span className="text-sm text-gray-600">Outdoor Living Spaces</span>
                         </div>
                       </div>
                     </div>
                   </div>
 
                   {/* Landscape & Sod Service */}
-                  <div className="bg-gray-800 rounded-2xl overflow-hidden">
+                  <div className="rounded-2xl overflow-hidden" style={{ backgroundColor: '#9e9e9e' }}>
                     <div className="relative h-48">
                       <Image
                         src="/IMG_3287.JPG"
@@ -719,35 +770,35 @@ export default function Page() {
                       />
                       <div className="absolute inset-0 bg-black/30"></div>
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <h4 className="text-2xl font-bold text-white text-center">Landscape & Sod</h4>
+                        <h4 className="text-2xl font-bold text-white text-center">Landscape</h4>
                       </div>
                     </div>
                     <div className="p-6">
-                      <p className="text-white/80 mb-4">Complete landscaping and sod installation</p>
+                      <p className="text-gray-700 mb-4">Complete landscaping and sod installation</p>
                       <div className="grid grid-cols-1 gap-2">
                         <div className="flex items-center space-x-2">
-                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                          <span className="text-sm text-white/70">Landscape Design</span>
+                          <div className="w-2 h-2 bg-black rounded-full"></div>
+                          <span className="text-sm text-gray-600">Landscape Design</span>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                          <span className="text-sm text-white/70">Sod Installation</span>
+                          <div className="w-2 h-2 bg-black rounded-full"></div>
+                          <span className="text-sm text-gray-600">Sod Installation</span>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                          <span className="text-sm text-white/70">Mulch Installation</span>
+                          <div className="w-2 h-2 bg-black rounded-full"></div>
+                          <span className="text-sm text-gray-600">Mulch Installation</span>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                          <span className="text-sm text-white/70">Drainage Solutions</span>
+                          <div className="w-2 h-2 bg-black rounded-full"></div>
+                          <span className="text-sm text-gray-600">Drainage Solutions</span>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                          <span className="text-sm text-white/70">Outdoor Living Spaces</span>
+                          <div className="w-2 h-2 bg-black rounded-full"></div>
+                          <span className="text-sm text-gray-600">Outdoor Living Spaces</span>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                          <span className="text-sm text-white/70">Garden Design</span>
+                          <div className="w-2 h-2 bg-black rounded-full"></div>
+                          <span className="text-sm text-gray-600">Garden Design</span>
                         </div>
                       </div>
                     </div>
@@ -758,7 +809,7 @@ export default function Page() {
           </section>
 
           {/* Mission Statement & Why Choose Us */}
-          <section className="py-20 bg-gray-900 text-white">
+          <section className="py-20 bg-black text-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
               {/* Mission Statement */}
               <div className="text-center mb-20 animate-on-scroll animate-left" data-id="mission-statement">
@@ -783,7 +834,7 @@ export default function Page() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div className="text-center animate-on-scroll stagger-1" data-id="feature-1">
                   <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-6 transition-all duration-300 hover:scale-110">
-                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
@@ -795,7 +846,7 @@ export default function Page() {
 
                 <div className="text-center animate-on-scroll stagger-2" data-id="feature-2">
                   <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-6 transition-all duration-300 hover:scale-110">
-                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>
                   </div>
@@ -807,7 +858,7 @@ export default function Page() {
 
                 <div className="text-center animate-on-scroll stagger-3" data-id="feature-3">
                   <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-6 transition-all duration-300 hover:scale-110">
-                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
@@ -821,11 +872,11 @@ export default function Page() {
           </section>
 
           {/* Our Work Portfolio - Photo Collage */}
-          <section id="work" className="py-20 bg-white">
+          <section id="work" className="py-20 text-white" style={{ backgroundColor: '#424242' }}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
               <div className="text-center mb-16 animate-on-scroll animate-left" data-id="portfolio-title">
-                <h2 className="text-4xl font-bold text-gray-900 mb-4 fade-in-up stagger-1">Our Recent Work</h2>
-                <p className="text-lg text-gray-600 max-w-2xl mx-auto fade-in-up stagger-2">
+                <h2 className="text-4xl font-bold text-white mb-4 fade-in-up stagger-1">Our Recent Work</h2>
+                <p className="text-lg text-gray-300 max-w-2xl mx-auto fade-in-up stagger-2">
                   Take a look at some of our completed projects showcasing quality craftsmanship and attention to detail.
                 </p>
               </div>
@@ -940,7 +991,7 @@ export default function Page() {
               <div className="text-center">
                 <Link 
                   href="#contact" 
-                  className="bg-gray-900 text-white px-8 py-4 rounded-md font-bold text-lg hover:bg-gray-800 transition-all duration-300 hover:scale-105 inline-block fade-in-up stagger-9"
+                  className="bg-black text-white px-8 py-4 rounded-md font-bold text-lg hover:bg-gray-800 transition-all duration-300 hover:scale-105 inline-block fade-in-up stagger-9"
                 >
                   Start Your Project
                 </Link>
@@ -999,24 +1050,24 @@ export default function Page() {
                     </div>
                   </div>
 
-                  <div className="bg-gray-50 p-6 rounded-lg">
+                  <div className="bg-gray-50 p-6 rounded-lg" style={{ backgroundColor: '#9e9e9e' }}>
                     <h3 className="text-xl font-bold text-gray-900 mb-4">Contact Us</h3>
                     <p className="text-gray-700 mb-4">
                       Ready to discuss your construction project? Click the button below to get in touch.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4">
-                      <a 
-                        href={`tel:${config.contact.phone1}`}
-                        className="bg-gray-900 text-white px-6 py-3 rounded-md font-medium hover:bg-gray-800 transition-all duration-300 hover:scale-105 text-center"
-                      >
-                        Call Now
-                      </a>
-                      <a 
-                        href={`mailto:${config.contact.email}`}
-                        className="border-2 border-gray-900 text-gray-900 px-6 py-3 rounded-md font-medium hover:bg-gray-900 hover:text-white transition-all duration-300 hover:scale-105 text-center"
-                      >
-                        Send Email
-                      </a>
+                                          <a 
+                      href={`tel:${config.contact.phone1}`}
+                      className="bg-black text-white px-6 py-3 rounded-md font-medium hover:bg-gray-800 transition-all duration-300 hover:scale-105 text-center"
+                    >
+                      Call Now
+                    </a>
+                    <a 
+                      href={`mailto:${config.contact.email}`}
+                      className="border-2 border-black text-black px-6 py-3 rounded-md font-medium hover:bg-black hover:text-white transition-all duration-300 hover:scale-105 text-center"
+                    >
+                      Send Email
+                    </a>
                     </div>
                   </div>
                 </div>
@@ -1031,7 +1082,7 @@ export default function Page() {
         </main>
 
         {/* Footer */}
-        <footer className="bg-gray-900 text-white py-12">
+        <footer className="text-white py-12" style={{ backgroundColor: '#9e9e9e' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div className="md:col-span-2">
@@ -1045,11 +1096,11 @@ export default function Page() {
                   />
                   <div>
                     <h3 className="text-xl font-bold">{config.appName}</h3>
-                    <p className="text-gray-400 text-sm">Quality Construction Services</p>
+                    <p className="text-gray-800 text-sm">Quality Construction Services</p>
                   </div>
                 </div>
-                <p className="text-gray-300 mb-6 max-w-md">
-                  Professional construction and landscape services including concrete, stone & pavers, decks, and landscape & sod. 
+                <p className="text-gray-800 mb-6 max-w-md">
+                  Professional construction and landscape services including concrete, stone & pavers, decks, and landscape. 
                   Quality craftsmanship you can trust.
                 </p>
 
@@ -1057,17 +1108,17 @@ export default function Page() {
 
               <div>
                 <h4 className="text-lg font-bold mb-4">Services</h4>
-                <ul className="space-y-2 text-gray-300">
-                  <li><Link href="#services" className="hover:text-white transition-colors">Concrete</Link></li>
-                  <li><Link href="#services" className="hover:text-white transition-colors">Stone & Pavers</Link></li>
-                  <li><Link href="#services" className="hover:text-white transition-colors">Decks</Link></li>
-                  <li><Link href="#services" className="hover:text-white transition-colors">Landscape & Sod</Link></li>
+                <ul className="space-y-2 text-gray-800">
+                  <li><Link href="#services" className="hover:text-black transition-colors">Concrete</Link></li>
+                  <li><Link href="#services" className="hover:text-black transition-colors">Stone & Pavers</Link></li>
+                  <li><Link href="#services" className="hover:text-black transition-colors">Decks</Link></li>
+                  <li><Link href="#services" className="hover:text-black transition-colors">Landscape</Link></li>
                 </ul>
               </div>
 
               <div>
                 <h4 className="text-lg font-bold mb-4">Contact</h4>
-                <ul className="space-y-2 text-gray-300">
+                <ul className="space-y-2 text-gray-800">
                   <li>{config.contact.phone1}</li>
                   <li>{config.contact.phone2}</li>
                   <li>{config.contact.email}</li>
@@ -1076,8 +1127,8 @@ export default function Page() {
               </div>
             </div>
 
-            <div className="mt-12 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
-              <p className="text-gray-400">© 2024 {config.appName}. All rights reserved.</p>
+            <div className="mt-12 pt-8 border-t border-gray-600 flex flex-col md:flex-row justify-between items-center">
+              <p className="text-gray-700">© 2024 {config.appName}. All rights reserved.</p>
 
             </div>
           </div>
